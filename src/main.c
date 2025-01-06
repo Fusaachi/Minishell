@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/06 13:40:31 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/06 16:52:43 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ int	main(int argc, char **argv)
 		if (!ft_whitespace(rl))
 			add_history(rl);
 		verif_quote(rl);
+		/*char yo[] = "ab | cdef | v";
+		
+		printf("strtok -> %s\n", strtok(yo, "|"));
+		// printf("yo = %s\n", yo);
+		printf("strtok -> %s\n", strtok(NULL, "|"));
+		// printf("yo = %s\n", yo);
+		*/
 		printf("%s\n", rl);
 	}
 	return (0);
