@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/06 13:03:38 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/06 13:40:31 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	{
 		rl = readline(prompt);
 		if (rl == NULL)
-			break;
+			break ;
 		if (!ft_whitespace(rl))
 			add_history(rl);
 		verif_quote(rl);
