@@ -12,65 +12,65 @@
 
 #include "../minishell.h"
 
-/*int ft_analyser_lexique( char *str)
+static bool is_space(char c)
 {
-
+    if ((c > 9 && c < 13) || c == 32)
+        return (true);
+    return (false);
 }
-*/
-int ft_whitespace(char *str)
+
+bool    empty_line(char *str)
 {
     int i;
     
     i = 0;
     while(str[i])
     {
-        if((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-            i++;
-        else
-            return(0);
+        if(is_space(str[i]) == false)
+            return (false);
+		i++;
     }
-    return(1);
+    return (true);
 }
 
-int verif_quote(char *str)
+static bool	is_quote(char c)
 {
-    int			squote;
-	int			dquote;
-    
-    squote = ft_check_quote(str, 34);
-	dquote = ft_check_quote(str, 39);
-    if (squote == 0 && dquote == 0)
-        return (0);
-    if (squote % 2 == 0 || dquote % 2 == 0)
-    {
-        printf("il y a une string");
-        return (1);
-    }
-        
-    return (0);
+	if (c == '"' || c == '\'')
+		return (true);
+	return (false);
 }
 
-int ft_check_quote(char *str, int quote)
+bool	skip_quote_iter_incr(char *raw,
+			size_t *iter)
 {
-    int i;
-    int count;
-    
-    i = 0;
-    count = 0;
-    while(str[i])
-    {
-        if(ft_quote(str[i], quote))
-            count++;
-        i++;
-    }
-    return(count);
-    
+	char	c;
+
+	c = raw[*iter];
+	(*iter)++;
+	while (raw[*iter] && raw[*iter] != c)
+		(*iter)++;
+	if (raw[*iter] == c)
+		return (true);
+	return (false);
 }
 
-int ft_quote(char c, int i)
+bool	verif_quote(char *str)
 {
-    if (c == i)
-        return (1);
-    return(0);
-}
+	size_t	i;
 
+	i = 0;
+	while (str[i])
+	{
+		if (is_quote(str[i]) == true)
+		{
+			if (skip_quote_iter_incr(str, &i) == false)
+			{
+				ft_putendl_fd("Error: Unclosed Quote", 2);
+				return (false);
+			}
+		}
+		if (str[i])
+			i++;
+	}
+	return (true);
+}

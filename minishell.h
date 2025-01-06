@@ -16,10 +16,11 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <stdbool.h>
 
-int ft_whitespace(char *str);
-int verif_quote(char *str);
-int ft_check_quote(char *str, int quote);
-int ft_quote(char c, int i);
+bool	empty_line(char *str);
+bool	verif_quote(char *str);
+bool	skip_quote_iter_incr(char *raw,
+			size_t *iter);
 
 #endif

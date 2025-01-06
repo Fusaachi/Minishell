@@ -23,13 +23,13 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error,\nnot needed arguments", 1);
 		return (1);
 	}
-	prompt = "$>";
+	prompt = "$El-Poposhell 👘: ";
 	while (1)
 	{
 		rl = readline(prompt);
 		if (rl == NULL)
 			break;
-		if (!ft_whitespace(rl))
+		if (empty_line(rl) == false)
 			add_history(rl);
 		verif_quote(rl);
 		printf("%s\n", rl);
