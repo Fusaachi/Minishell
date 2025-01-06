@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/06 10:48:56 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/06 12:59:39 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+
+void    ft_error(char *str);
+
 int ft_whitespace(char *str);
+int is_quote(char c);
 int verif_quote(char *str);
-int ft_check_quote(char *str, int quote);
-int ft_quote(char c, int i);
+int check_quote(char *str, int i);
 
 #endif
