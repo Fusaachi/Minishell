@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/06 16:52:43 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:41:48 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	const char	*prompt;
-	char		*rl;
+	t_data data;
 
 	(void)argv;
 	if (argc != 1)
@@ -23,15 +22,15 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error,\nnot needed arguments\n", 1);
 		return (1);
 	}
-	prompt = "$>";
+	init_data(&data);
 	while (1)
 	{
-		rl = readline(prompt);
-		if (rl == NULL)
+		signaux(&data);
+		if (data.rl == NULL)
 			break ;
-		if (!ft_whitespace(rl))
-			add_history(rl);
-		verif_quote(rl);
+		if (!ft_whitespace(data.rl))
+			add_history(data.rl);
+		verif_quote(data.rl);
 		/*char yo[] = "ab | cdef | v";
 		
 		printf("strtok -> %s\n", strtok(yo, "|"));
@@ -39,7 +38,7 @@ int	main(int argc, char **argv)
 		printf("strtok -> %s\n", strtok(NULL, "|"));
 		// printf("yo = %s\n", yo);
 		*/
-		printf("%s\n", rl);
+		printf("%s\n", data.rl);
 	}
 	return (0);
 }

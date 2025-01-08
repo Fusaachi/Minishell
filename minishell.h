@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/06 16:53:45 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:40:14 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
+# include <bits/sigaction.h>
 
-enum	TYPE
+enum	e_type
 {
 	CMD,
 	PIPE,
@@ -25,23 +27,31 @@ enum	TYPE
 	REDIR_OUT,
 	HERE_DOC,
 	APPEND,
-}type;
+};
 
-typedef struct s_token
+typedef struct s_token	t_token;
+struct s_token
 {
-	type;
-	char	*token;
-	t_token	*next;
-}t_token;
+	enum e_type	type;
+	char		*token;
+	t_token		*next;
+};
 
-typedef struct s_shell
+typedef struct s_data
 {
-	t_token *first;
-}t_shell;
+	t_token		*first;
+	char		*rl;
+	const char	*prompt;
+}t_data;
 
-int	ft_whitespace(char *str);
-int	is_quote(char c);
-int	verif_quote(char *str);
-int	check_quote(char *str, int i);
+void	signaux(t_data *data);
+void	handle_signal(int signum);
+
+void	init_data(t_data *data);
+
+int		ft_whitespace(char *str);
+int		is_quote(char c);
+int		verif_quote(char *str);
+int		check_quote(char *str, int i);
 
 #endif
