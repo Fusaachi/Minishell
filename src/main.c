@@ -6,13 +6,13 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/08 16:41:48 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/08 17:45:15 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	t_data data;
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		signaux(&data);
+		data.rl = readline(data.prompt);
 		if (data.rl == NULL)
 			break ;
 		if (!ft_whitespace(data.rl))

@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:13:44 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/08 17:14:20 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/08 17:37:23 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	handle_signal(int signum)
 	if (signum == SIGINT)
 	{
 		printf("\n$>");
-		//rl_on_new_line();
+		rl_replace_line("", 0);	
 	}
 }
 
@@ -33,8 +33,5 @@ void	signaux(t_data *data)
 	sa.sa_handler = handle_signal;
 	sa1.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &sa, NULL);
-		//rl_replace_line(data->rl, 0);	
-
 	sigaction(SIGQUIT, &sa1, NULL);
-	data->rl = readline(data->prompt);
 }
