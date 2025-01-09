@@ -1,35 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:14:16 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/09 14:15:52 by pgiroux          ###   ########.fr       */
+/*   Created: 2025/01/09 10:36:13 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/01/09 13:53:04 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init_data(t_data *data)
+t_data	*init_env(t_env *env, t_data *data, char **envp)
 {
-	data->t_first = NULL;
-	data->e_first = NULL;
-	data->rl = NULL;
-	data->prompt = "$>";
+	int	i;
+
+	i = 1;
+	env = lstnew(envp[0]);
+	data->e_first = env;
+	while (envp[i])
+	{
+		env->next = lstnew(envp[i]);
+		env = env->next;
+		i++;
+	}
+	return (data);
 }
 
-/*t_list	*initialistion(void)
+t_env	*lstnew(char *content)
 {
-	t_token	*token;
+	t_env	*new;
 
-	token = malloc(sizeof(*token));
-	if (token == 0)
+	new = malloc(sizeof(t_env *));
+	new->content = ft_strdup(content);
+	if (!new->content && !new)
 	{
-		free(token);
+		free(new);
 		exit(EXIT_FAILURE);
-	}	
-	token->token = "";
-	token->next = NULL;
-}*/
+	}
+	new->next = NULL;
+	return (new);
+}

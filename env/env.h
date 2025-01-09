@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:14:16 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/09 14:15:52 by pgiroux          ###   ########.fr       */
+/*   Created: 2025/01/09 10:32:56 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/01/09 13:52:45 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#ifndef ENV_H
+# define ENV_H
 
-void	init_data(t_data *data)
+# include "../minishell.h"
+
+typedef struct s_data	t_data;
+typedef struct s_env	t_env;
+struct s_env
 {
-	data->t_first = NULL;
-	data->e_first = NULL;
-	data->rl = NULL;
-	data->prompt = "$>";
-}
+	char	*content;
+	t_env	*next;
+};
 
-/*t_list	*initialistion(void)
-{
-	t_token	*token;
+t_data	*init_env(t_env *lst, t_data *data, char **envp);
+t_env	*lstnew(char *content);
 
-	token = malloc(sizeof(*token));
-	if (token == 0)
-	{
-		free(token);
-		exit(EXIT_FAILURE);
-	}	
-	token->token = "";
-	token->next = NULL;
-}*/
+#endif

@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/08 16:40:14 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:10:36 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <signal.h>
-# include <bits/sigaction.h>
+# include "signals/signals.h"
+# include "env/env.h"
+# include "utils/utils.h"
 
 enum	e_type
 {
@@ -39,13 +40,14 @@ struct s_token
 
 typedef struct s_data
 {
-	t_token		*first;
+	t_token		*t_first;
+	t_env		*e_first;
 	char		*rl;
 	const char	*prompt;
 }t_data;
 
-void	signaux(t_data *data);
 void	handle_signal(int signum);
+
 
 void	init_data(t_data *data);
 

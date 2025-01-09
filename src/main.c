@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/08 17:45:15 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:17:25 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_data data;
+	t_env env;
 
 	(void)argv;
 	if (argc != 1)
@@ -23,9 +24,10 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	}
 	init_data(&data);
+	init_env(&env, &data, envp);
 	while (1)
 	{
-		signaux(&data);
+		signals();
 		data.rl = readline(data.prompt);
 		if (data.rl == NULL)
 			break ;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signaux.c                                          :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:13:44 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/08 17:37:23 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:15:29 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	handle_signal(int signum)
 {
 	if (signum == SIGINT)
 	{
-		printf("\n$>");
-		rl_replace_line("", 0);	
+		write(1, "\n$>", 3);
+		rl_replace_line("", 0);
 	}
 }
 
-void	signaux(t_data *data)
+void	signals(void)
 {
-	struct sigaction sa;
-	struct sigaction sa1;
+	struct sigaction	sa;
+	struct sigaction	sa1;
 
 	sa.sa_flags = 0;
 	sa1.sa_flags = 0;

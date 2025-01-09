@@ -6,7 +6,7 @@
 #    By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 15:16:56 by pgiroux           #+#    #+#              #
-#    Updated: 2025/01/08 15:37:36 by pgiroux          ###   ########.fr        #
+#    Updated: 2025/01/09 14:13:04 by pgiroux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,10 @@ LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 
-FILE = main utils analyserlexical init signaux
+FILE = main utils analyserlexical init 
+SIGNAL = signals
+ENV = env
+UTIL = utils
 
 GREEN = \033[1;32m
 BLUE= \033[1;34m
@@ -30,10 +33,25 @@ NC = \033[0m
 INCLUDE = ./libft/libft.a
 
 FILE_DIR = ./src/
+SIGNAL_DIR = ./signals/
+ENV_DIR = ./env/
+UTIL_DIR = ./utils/
+
 OBJ_DIR = ./obj/
 
+
+
 FILES = $(addprefix $(FILE_DIR), $(addsuffix .c, $(FILE)))
+SIGNALS = $(addprefix $(SIGNAL_DIR), $(addsuffix .c, $(SIGNAL)))
+ENVS = $(addprefix $(ENV_DIR), $(addsuffix .c, $(ENV)))
+UTILS = $(addprefix $(UTIL_DIR), $(addsuffix .c, $(UTIL)))
+
+
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILE)))
+SIGNAL_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SIGNAL)))
+ENV_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(ENV)))
+UTIL_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(UTIL)))
+
 
 all : $(NAME)
 	
@@ -42,8 +60,20 @@ $(OBJ_DIR)%.o: $(FILE_DIR)%.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
 	@echo "$@ : $(GREEN)[OK]$(NC)"
 
-$(NAME): $(LIBFT) $(OBJS)
-	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(INCLUDE) -o  $(NAME)
+$(OBJ_DIR)%.o: $(SIGNAL_DIR)%.c
+	@$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "$@ : $(GREEN)[OK]$(NC)"
+	
+$(OBJ_DIR)%.o: $(ENV_DIR)%.c
+	@$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "$@ : $(GREEN)[OK]$(NC)"
+
+$(OBJ_DIR)%.o: $(UTIL_DIR)%.c
+	@$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "$@ : $(GREEN)[OK]$(NC)"
+
+$(NAME): $(LIBFT) $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS)
+	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS) $(INCLUDE) -o  $(NAME)
 	@echo "\n$(BLUE)=============================================$(NC)\n"
 	
 
