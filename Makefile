@@ -6,7 +6,7 @@
 #    By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 15:16:56 by pgiroux           #+#    #+#              #
-#    Updated: 2025/01/09 14:13:04 by pgiroux          ###   ########.fr        #
+#    Updated: 2025/01/10 15:22:07 by pgiroux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,10 @@ LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 
-FILE = main utils analyserlexical init 
+FILE = main analyserlexical init 
 SIGNAL = signals
 ENV = env
-UTIL = utils
+UTIL = free
 
 GREEN = \033[1;32m
 BLUE= \033[1;34m

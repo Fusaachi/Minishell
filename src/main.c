@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/09 14:17:25 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/10 15:36:50 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data data;
-	t_env env;
+	t_data	data;
+	t_env	env;
 
 	(void)argv;
 	if (argc != 1)
@@ -24,7 +24,8 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	}
 	init_data(&data);
-	init_env(&env, &data, envp);
+	if (envp[0] != NULL)
+		init_env(&env, &data, envp);
 	while (1)
 	{
 		signals();
@@ -43,5 +44,6 @@ int	main(int argc, char **argv, char **envp)
 		*/
 		printf("%s\n", data.rl);
 	}
+	all_free(&data, &env, envp);
 	return (0);
 }
