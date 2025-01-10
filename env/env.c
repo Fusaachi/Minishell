@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:36:13 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/10 15:33:08 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/10 15:55:43 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,3 @@ char	*env_value(char *str)
 		len++;
 	return (ft_substr(str, i, len));
 }
-
-

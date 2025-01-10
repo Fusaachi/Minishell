@@ -6,12 +6,11 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:09:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/10 15:25:53 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/10 15:55:21 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 t_env	*free_env(t_data *data, t_env *env)
 {
@@ -34,5 +33,4 @@ void	all_free(t_data *data, t_env *env, char **envp)
 {
 	if (envp[0] != NULL)
 		free_env(data, env);
-	//free(data->rl);
 }

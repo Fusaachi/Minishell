@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/09 14:10:36 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/10 15:55:59 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_data
 }t_data;
 
 void	handle_signal(int signum);
-
 
 void	init_data(t_data *data);
 

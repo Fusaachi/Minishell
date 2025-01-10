@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/10 15:36:50 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/10 15:48:13 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char **argv, char **envp)
 		// printf("yo = %s\n", yo);
 		*/
 		printf("%s\n", data.rl);
+		free(data.rl);
 	}
 	all_free(&data, &env, envp);
 	return (0);
