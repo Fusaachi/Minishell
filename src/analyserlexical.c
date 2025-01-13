@@ -43,13 +43,13 @@ static bool	is_quote(char c)
 bool	skip_quote_iter_incr(char *raw,
 			size_t *iter)
 {
-	char	c;
+	char	quote;
 
-	c = raw[*iter];
+	quote = raw[*iter];
 	(*iter)++;
-	while (raw[*iter] && raw[*iter] != c)
+	while (raw[*iter] && raw[*iter] != quote)
 		(*iter)++;
-	if (raw[*iter] == c)
+	if (raw[*iter] == quote)
 		return (true);
 	return (false);
 }
