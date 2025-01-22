@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/22 14:55:13 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/22 16:08:16 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	t_env	env;
 
-	(void)argv;
-	if (argc != 1)
+	if (argc != 2)
 	{
 		ft_putstr_fd("Error,\nnot needed arguments\n", 1);
 		return (1);
@@ -61,9 +60,9 @@ int	main(int argc, char **argv, char **envp)
 	printf("-----------------------------------------------------------------\n");
 	printf("Path is %s\n", ft_getpath(data.e_first, "lvm"));
 	char **args = malloc(sizeof(char *) * 2);
-	args[0] = ft_strdup("-l");
+	args[0] = NULL;
 	args[1] = NULL;
-	execone("ls", args, data.e_first);
+	execone(argv[1], args, data.e_first);
 	all_free(&data, &env, envp);
 	return (0);
 }
