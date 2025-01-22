@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/06 10:22:22 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/22 10:18:48 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,46 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "signals/signals.h"
+# include "env/env.h"
+# include "utils/utils.h"
+# include "builtin/builtin.h"
+# include "pipe/pipe.h"
 
-int ft_whitespace(char *str);
-int verif_quote(char *str);
-int ft_check_quote(char *str, int quote);
-int ft_quote(char c, int i);
+enum	e_type
+{
+	CMD,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	HERE_DOC,
+	APPEND,
+};
+
+typedef struct s_token	t_token;
+struct s_token
+{
+	enum e_type	type;
+	char		*token;
+	t_token		*next;
+};
+
+typedef struct s_data
+{
+	t_token		*t_first;
+	t_env		*e_first;
+	char		*rl;
+	const char	*prompt;
+}t_data;
+
+void	handle_signal(int signum);
+
+
+void	init_data(t_data *data);
+
+int		ft_whitespace(char *str);
+int		is_quote(char c);
+int		verif_quote(char *str);
+int		check_quote(char *str, int i);
 
 #endif
