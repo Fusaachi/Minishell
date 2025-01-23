@@ -1,42 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:14:16 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/13 16:26:35 by pgiroux          ###   ########.fr       */
+/*   Created: 2025/01/13 15:26:25 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/01/20 13:27:53 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init(t_data *data, t_env *env, char **envp)
+void	main_exec(t_data *data)
 {
-	init_data(data);
-	if (envp[0] != NULL)
-		init_env(env, data, envp);
-}
-
-void	init_data(t_data *data)
-{
-	data->t_first = NULL;
-	data->e_first = NULL;
-	data->rl = NULL;
-	data->prompt = "MiniPaul>";
-}
-
-/*t_list	*initialistion(void)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(*token));
-	if (token == 0)
+	if (pipe_pars(data->rl))
 	{
-		free(token);
-		exit(EXIT_FAILURE);
-	}	
-	token->token = "";
-	token->next = NULL;
-}*/
+		
+	}
+}
+
+bool pipe_pars(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '|')
+		{
+			i++;
+			while (str[i] == ' ')
+				i++;
+			if (str[i] == '|' || !str[i])
+			{
+				ft_putstr_fd("MiniPaul: parse error near `|'\n", 2);
+				return (false);
+			}
+		}
+		i++;
+	}
+	return (true);
+}

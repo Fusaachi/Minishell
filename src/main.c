@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/10 15:48:13 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/20 13:29:12 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	if (argc != 1)
 	{
-		ft_putstr_fd("Error,\nnot needed arguments\n", 1);
+		ft_putstr_fd("Error,\nnot needed arguments\n", 2);
 		return (1);
 	}
-	init_data(&data);
-	if (envp[0] != NULL)
-		init_env(&env, &data, envp);
+	init(&data, &env, envp);
 	while (1)
 	{
 		signals();
@@ -35,6 +33,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!ft_whitespace(data.rl))
 			add_history(data.rl);
 		verif_quote(data.rl);
+		main_exec(&data);
 		/*char yo[] = "ab | cdef | v";
 		
 		printf("strtok -> %s\n", strtok(yo, "|"));

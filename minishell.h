@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/10 15:55:59 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:28:34 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <readline/history.h>
 # include "signals/signals.h"
 # include "env/env.h"
+# include <stdbool.h>
 # include "utils/utils.h"
 
 enum	e_type
@@ -48,11 +49,15 @@ typedef struct s_data
 
 void	handle_signal(int signum);
 
+void	init(t_data *data, t_env *env, char **envp);
 void	init_data(t_data *data);
 
-int		ft_whitespace(char *str);
-int		is_quote(char c);
-int		verif_quote(char *str);
+bool		ft_whitespace(char *str);
+bool		is_quote(char c);
+bool		verif_quote(char *str);
 int		check_quote(char *str, int i);
+
+void	main_exec(t_data *data);
+bool	pipe_pars(char *str);
 
 #endif

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   analyserlexical.c                                  :+:      :+:    :+:   */
+/*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:42:18 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/06 13:40:18 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/20 13:29:02 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_whitespace(char *str)
+bool	ft_whitespace(char *str)
 {
 	int	i;
 
@@ -22,19 +22,19 @@ int	ft_whitespace(char *str)
 		if ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 			i++;
 		else
-			return (0);
+			return (false);
 	}
-	return (1);
+	return (true);
 }
 
-int	is_quote(char c)
+bool	is_quote(char c)
 {
 	if (c == 39 || c == 34)
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }
 
-int	verif_quote(char *str)
+bool	verif_quote(char *str)
 {
 	int	i;
 
@@ -45,15 +45,15 @@ int	verif_quote(char *str)
 		{
 			if (!check_quote(str, i))
 			{
-				ft_putstr_fd("Error,\nQuote no closed\n", 1);
-				return (0);
+				ft_putstr_fd("Error,\nQuote no closed\n", 2);
+				return (false);
 			}
 			else
 				i = check_quote(str, i);
 		}
 		i++;
 	}
-	return (1);
+	return (true);
 }
 
 int	check_quote(char *str, int i)

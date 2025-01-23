@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:36:13 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/10 15:55:43 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/21 12:57:31 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char	*env_key(char *str)
 	while (str[len] != '=')
 		len++;
 	key = malloc(sizeof(char *) * len + 1);
+	if (!key)
+		perror(NULL);
 	while (i < len)
 	{
 		key[i] = str[i];
