@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:10:07 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/22 14:44:16 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/23 14:24:01 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PIPE_H
 
 # include "../minishell.h"
+# include <sys/types.h>
+# include <sys/wait.h>
 
 char	**envmaker(t_env *e_first);
 void	doubletabprintf(char **tab);
