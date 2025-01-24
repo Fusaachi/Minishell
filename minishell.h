@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/13 16:28:34 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/24 14:31:53 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "env/env.h"
 # include <stdbool.h>
 # include "utils/utils.h"
+# include "token/token.h"
 
 enum	e_type
 {
@@ -52,9 +53,11 @@ void	handle_signal(int signum);
 void	init(t_data *data, t_env *env, char **envp);
 void	init_data(t_data *data);
 
-bool		ft_whitespace(char *str);
-bool		is_quote(char c);
-bool		verif_quote(char *str);
+char	*strtoken(char *str, const char *delimiter);
+
+bool	ft_whitespace(char *str);
+bool	is_quote(char c);
+bool	verif_quote(char *str);
 int		check_quote(char *str, int i);
 
 void	main_exec(t_data *data);

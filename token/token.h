@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 15:26:25 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/24 14:32:48 by pgiroux          ###   ########.fr       */
+/*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/01/24 14:23:08 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#ifndef TOKEN_H
+# define TOKEN_H
+# include "../minishell.h"
 
-void	main_exec(t_data *data)
+typedef struct s_tok
 {
-	if (pipe_pars(data->rl))
-	{
-	}
-}
+	char	**strs;
+	size_t	k;
+	size_t	i;
+	size_t	j;
+	size_t	temp;
+}t_tok;
 
-bool	pipe_pars(char *str)
-{
-	int	i;
+char			*strtoken(char *str, const char *delimiter);
+static size_t	ft_count_token( char *str, const char *delimit);
+int				ft_isprint(int c);
+bool			verif_delimit( char *str, const char *delimit, int i);
+bool			is_print(char *str, int i);
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '|')
-		{
-			i++;
-			while (str[i] == ' ')
-				i++;
-			if (str[i] == '|' || !str[i])
-			{
-				ft_putstr_fd("MiniPaul: parse error near `|'\n", 2);
-				return (false);
-			}
-		}
-		i++;
-	}
-	return (true);
-}
+#endif
