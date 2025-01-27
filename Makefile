@@ -6,7 +6,7 @@
 #    By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 15:16:56 by pgiroux           #+#    #+#              #
-#    Updated: 2025/01/22 10:16:01 by pfranke          ###   ########.fr        #
+#    Updated: 2025/01/27 09:56:20 by pfranke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FILE = main analyserlexical init
 SIGNAL = signals
 ENV = env
 UTIL = free
-BUILTIN = cd echo bt_env export pwd unset utils
+BUILTIN = bt_cd bt_echo bt_env bt_export bt_pwd bt_unset bt_utils
 PIPE = pipe_utils pipe
 
 GREEN = \033[1;32m

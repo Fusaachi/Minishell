@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/22 16:08:16 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/27 10:00:16 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,8 @@ int	main(int argc, char **argv, char **envp)
 		printf("%s\n", data.rl);
 	}
 	*/
-	printf("-----------------------------------------------------------------\n");
-	bt_env(data.e_first);
-	printf("efirst = %p\n", data.e_first);
-	data.e_first = export(data.e_first, "yo=coucou");
-	printf("-----------------------------------------------------------------\n");
-	printf("efirst = %p\n", data.e_first);
-	bt_env(data.e_first);
-	printf("-----------------------------------------------------------------\n");
-	data.e_first = unset("yo", data.e_first);
-	printf("-----------------------------------------------------------------\n");
-	printf("efirst = %p\n", data.e_first);
-	bt_env(data.e_first);
-	printf("-----------------------------------------------------------------\n");
-	printf("Path is %s\n", ft_getpath(data.e_first, "lvm"));
-	char **args = malloc(sizeof(char *) * 2);
-	args[0] = NULL;
+	char *args[2];
+	args[0] = argv[1];
 	args[1] = NULL;
 	execone(argv[1], args, data.e_first);
 	all_free(&data, &env, envp);

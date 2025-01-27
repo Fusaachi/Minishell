@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:06:01 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/23 14:24:25 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/27 09:58:43 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ char	**ft_pathsplit(t_env *e_first, char *name)
 	t_env	*tmp;
 
 	tmp = e_first;
-	printf("name is %s\n", name);
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, name))
@@ -92,7 +91,6 @@ char	*ft_getpath(t_env *e_first, char *name)
 	{
 		tmp = ft_strjoin(path[i], "/");
 		tmp = ft_strjoin(tmp, name);
-		printf("tmp = %s\n", tmp);
 		if (!access(tmp, X_OK))
 		{
 			ft_free_tab(path);

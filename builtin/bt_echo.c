@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bt_env.c                                           :+:      :+:    :+:   */
+/*   bt_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 14:11:50 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/27 09:38:14 by pfranke          ###   ########.fr       */
+/*   Created: 2025/01/27 09:31:04 by pfranke           #+#    #+#             */
+/*   Updated: 2025/01/27 09:56:40 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include <stdio.h>
 
-int	bt_env(t_env *env)
+int	bt_echo (char **argv)
 {
-	t_env	*tmp;
+	int	i;
 
-	if (!env)
-		return (EXIT_SUCCESS);
-	tmp = env;
-	while (tmp)
+	i = 1;
+	while (argv[i])
 	{
-		printf("%s\n", tmp->content);
-		tmp = tmp->next;
-		if (env->content)
-			printf("%s\n", env->content);
-		else
-			return (EXIT_FAILURE);
-		env = env->next;
+		printf("%s", argv[i]);
+		if (argv[i + 1])
+			printf(" ");
+		i++;
 	}
-	return (EXIT_SUCCESS);
+	printf("\n");
+	return (0);
 }

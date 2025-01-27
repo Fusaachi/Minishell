@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:56:15 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/23 14:21:48 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/27 10:02:07 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	execone(char *command, char **args, t_env *e_first)
 	if (pid == -1)
 	{
 		perror("fork");
-		return (1);
+		return (EXIT_FAILURE);
 	}
 	if (pid == 0)
 	{
@@ -36,5 +36,7 @@ int	execone(char *command, char **args, t_env *e_first)
 		}
 	}
 	waitpid(pid, &ret, 0);
-	return (0);
+	return (EXIT_SUCCESS);
 }
+
+int pipe_maker(

@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/23 14:22:50 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/27 10:02:38 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <pipe.h>
 # include "signals/signals.h"
 # include "env/env.h"
 # include "utils/utils.h"
