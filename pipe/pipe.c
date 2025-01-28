@@ -6,13 +6,13 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:56:15 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/27 10:07:07 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/28 16:54:48 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	execone(char *command, char **args, t_env *e_first)
+int	pipe_execone(char *command, char **args, t_env *e_first)
 {
 	char	**env;
 	char	*path;
@@ -39,4 +39,24 @@ int	execone(char *command, char **args, t_env *e_first)
 	return (EXIT_SUCCESS);
 }
 
-int pipe
+int	pipe_outfile(t_pipe spipe)
+{
+	int	fds[2];
+
+	pipe(fds);
+	if (fork() == 0)
+	{
+		dup2(fds[1], 1);
+		close(fds[0]);
+		close(fds[1]);
+		pipe_execone(spipe.command, spipe.args, spipe.e_first);
+		exit(0);
+	}
+	else
+	{
+		dup2(fds[0], 0);
+		close(fds[0]);
+		close(fds[1]);
+	}
+	return (0);
+}

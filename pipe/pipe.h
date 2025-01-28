@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:10:07 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/27 09:30:48 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/28 13:17:06 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ char	*ft_getpath(t_env *e_first, char *name);
  * 
  * @return Returns 0 on success, or 1 on fork failure.
  */
-int		execone(char *command, char **args, t_env *e_first);
+int		pipe_execone(char *command, char **args, t_env *e_first);
 
 #endif
