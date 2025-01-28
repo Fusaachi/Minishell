@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:56:15 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/27 10:02:07 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/27 10:07:07 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,4 @@ int	execone(char *command, char **args, t_env *e_first)
 	return (EXIT_SUCCESS);
 }
 
-int pipe_maker(
+int pipe
