@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/29 10:47:03 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/29 12:42:38 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ void	init_data(t_data *data);
 
 char	*strtoken(char *str, const char *delimiter);
 
-bool	ft_whitespace(char *str);
 bool	verif_quote(char *str);
 int		check_quote(char *str, int i);
-int		check_quote2(char *str, int i);
 
 void	main_exec(t_data *data);
 bool	pipe_pars(char *str);

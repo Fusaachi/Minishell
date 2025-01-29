@@ -6,11 +6,26 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:05:47 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/29 10:09:28 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/29 12:43:07 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+bool	is_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+			i++;
+		else
+			return (false);
+	}
+	return (true);
+}
 
 bool	is_quote(char c)
 {

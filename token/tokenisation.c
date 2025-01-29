@@ -6,13 +6,13 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 13:52:36 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/29 10:08:31 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/29 13:03:19 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*char	**strtoken(char *str, const char *delimiter)
+char	**strtoken(char *str, const char *delimiter)
 {
 	t_tok	*t;
 
@@ -41,48 +41,25 @@
 	return (t->strs);
 }
 
-static size_t	ft_count_token( char *str, const char *delimit)
+static size_t	ft_count_token( char *str, const char delimit)
 {
-	size_t	i;
-	size_t	s_del;
-	size_t	nb_tok;
+	size_t i;
+	size_t nb_tok;
 
+	nb_tok = 1;
 	i = 0;
-	s_del = strlen(delimit);
-	nb_tok = 0;
-	if (is_char(str, i))
+
+	while (str[i])
 	{
-		nb_tok = 1;
-		while (str[i])
+		if (is_quote(str[i]))
 		{
-			if (str[i] == delimit[0])
-			{
-				if (verif_delimit(str, delimit, i)
-					&& is_char(str, i + s_del) && str[i + s_del])
-				{
-					nb_tok++;
-					i += s_del;
-				}
-			}
 			i++;
+			while (!is_quote(str[i]))
+				i++;
 		}
+		else if (str[i] == delimit)
+			nb_tok++;
+		i++;
 	}
 	return (nb_tok);
 }
-
-bool	verif_delimit( char *str, const char *delimit, int i)
-{
-	int	j;
-
-	j = 0;
-	while (str[i] == delimit[j] && delimit[j])
-	{
-		i++;
-		j++;
-	}
-	if (delimit[j] == '\0')
-		return (true);
-	return (false);
-}
-
-*/
