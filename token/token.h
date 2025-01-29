@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/24 14:23:08 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/29 10:12:50 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ typedef struct s_tok
 	size_t	temp;
 }t_tok;
 
-char			*strtoken(char *str, const char *delimiter);
+/*char			*strtoken(char *str, const char *delimiter);
 static size_t	ft_count_token( char *str, const char *delimit);
-int				ft_isprint(int c);
 bool			verif_delimit( char *str, const char *delimit, int i);
-bool			is_print(char *str, int i);
+*/
 
 #endif

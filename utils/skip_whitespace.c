@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   skip_whitespace.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 14:10:02 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/29 10:19:53 by pgiroux          ###   ########.fr       */
+/*   Created: 2025/01/29 10:45:25 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/01/29 10:46:29 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "../minishell.h"
 
-# include "../minishell.h"
+int	skip_space(char *str)
+{
+	int	i;
 
-t_env	*free_env(t_data *data, t_env *env);
-void	all_free(t_data *data, t_env *env, char **envp);
+	i = 0;
+	while (is_space(str[i]))
+		i++;
+	return (i);
+}
 
-bool	is_char(char c);
-bool	is_space(char c);
-bool	is_quote(char c);
+int	skip_end(char *str)
+{
+	int	i;
 
-int		skip_space(char *str);
-int		skip_end(char *str);
-
-#endif
+	i = 0;
+	while (str[i])
+		i++;
+	i--;
+	while (is_space(str[i]))
+		i--;
+	return (i);
+}

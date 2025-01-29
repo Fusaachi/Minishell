@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/20 13:29:12 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/29 10:32:05 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!ft_whitespace(data.rl))
 			add_history(data.rl);
 		verif_quote(data.rl);
+		data.rl = epur(data.rl);
 		main_exec(&data);
 		/*char yo[] = "ab | cdef | v";
 		

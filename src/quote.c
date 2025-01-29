@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:42:18 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/20 13:29:02 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/29 10:47:23 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ bool	ft_whitespace(char *str)
 			return (false);
 	}
 	return (true);
-}
-
-bool	is_quote(char c)
-{
-	if (c == 39 || c == 34)
-		return (true);
-	return (false);
 }
 
 bool	verif_quote(char *str)
@@ -66,5 +59,23 @@ int	check_quote(char *str, int i)
 		i++;
 	if (str[i] == quote)
 		return (i);
+	return (0);
+}
+
+int	check_quote2(char *str, int i)
+{
+	char	quote;
+	int		other;
+
+	quote = str[i];
+	i++;
+	other = 1;
+	while (str[i] && str[i] != quote)
+	{
+		i++;
+		other++;
+	}
+	if (str[i] == quote)
+		return (other);
 	return (0);
 }

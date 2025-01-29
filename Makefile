@@ -6,7 +6,7 @@
 #    By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 15:16:56 by pgiroux           #+#    #+#              #
-#    Updated: 2025/01/13 15:56:31 by pgiroux          ###   ########.fr        #
+#    Updated: 2025/01/29 10:20:37 by pgiroux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ LIBFT = $(LIBFT_PATH)/libft.a
 FILE = main quote init exec
 SIGNAL = signals
 ENV = env
-UTIL = free
+UTIL = free is skip_whitespace
+EPUR = epur
 
 GREEN = \033[1;32m
 BLUE= \033[1;34m
@@ -36,6 +37,7 @@ FILE_DIR = ./src/
 SIGNAL_DIR = ./signals/
 ENV_DIR = ./env/
 UTIL_DIR = ./utils/
+EPUR_DIR = ./epur/
 
 OBJ_DIR = ./obj/
 
@@ -44,12 +46,14 @@ OBJ_DIR = ./obj/
 FILES = $(addprefix $(FILE_DIR), $(addsuffix .c, $(FILE)))
 SIGNALS = $(addprefix $(SIGNAL_DIR), $(addsuffix .c, $(SIGNAL)))
 ENVS = $(addprefix $(ENV_DIR), $(addsuffix .c, $(ENV)))
+EPURS = $(addprefix $(EPUR_DIR), $(addsuffix .c, $(EPUR)))
 UTILS = $(addprefix $(UTIL_DIR), $(addsuffix .c, $(UTIL)))
 
 
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILE)))
 SIGNAL_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SIGNAL)))
 ENV_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(ENV)))
+EPUR_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(EPUR)))
 UTIL_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(UTIL)))
 
 
@@ -68,12 +72,16 @@ $(OBJ_DIR)%.o: $(ENV_DIR)%.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
 	@echo "$@ : $(GREEN)[OK]$(NC)"
 
+$(OBJ_DIR)%.o: $(EPUR_DIR)%.c
+	@$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "$@ : $(GREEN)[OK]$(NC)"
+
 $(OBJ_DIR)%.o: $(UTIL_DIR)%.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
 	@echo "$@ : $(GREEN)[OK]$(NC)"
 
-$(NAME): $(LIBFT) $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS)
-	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS) $(INCLUDE) -o  $(NAME)
+$(NAME): $(LIBFT) $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS) $(EPUR_OBJS)
+	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(EPUR_OBJS) $(UTIL_OBJS) $(INCLUDE) -o  $(NAME)
 	@echo "\n$(BLUE)=============================================$(NC)\n"
 	
 

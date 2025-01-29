@@ -6,13 +6,13 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 13:52:36 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/24 14:31:39 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/29 10:08:31 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**strtoken(char *str, const char *delimiter)
+/*char	**strtoken(char *str, const char *delimiter)
 {
 	t_tok	*t;
 
@@ -85,11 +85,4 @@ bool	verif_delimit( char *str, const char *delimit, int i)
 	return (false);
 }
 
-bool	is_print(char *str, int i)
-{
-	while (str[i] == 32 && str[i])
-		i++;
-	if (str[i] >= 33 && str[i] <= 127)
-		return (true);
-	return (false);
-}
+*/
