@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:26:25 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 15:08:29 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/30 17:41:10 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	main_exec(t_data *data)
 {
-	char **result;
-	int i = 0;
-	int x = 0;
+	char	**result;
+
 	if (pipe_pars(data->rl))
 	{
-		result = strtoken(data->rl,'|');
+		result = strtoken(data->rl, '|');
+		/*
+		char **result;
+		int i = 0;
+		int x = 0;
 		while(result[i])
 		{
 			x = 0;
@@ -30,23 +33,19 @@ void	main_exec(t_data *data)
 			}
 			printf("\n");
 			i++;
-		}
+		}*/
 	}
 }
 
 bool	pipe_pars(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
 	{
 		if (is_quote(str[i]))
-		{
-			i++;
-			while(!is_quote(str[i]))
-				i++;
-		}
+			check_quote(str, &i);
 		if (str[i] == '|')
 		{
 			i++;
@@ -56,7 +55,8 @@ bool	pipe_pars(char *str)
 				return (false);
 			}
 		}
-		i++;
+		if (str[i])
+			i++;
 	}
 	return (true);
 }

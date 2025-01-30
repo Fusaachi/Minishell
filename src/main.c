@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 13:11:41 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/30 17:41:50 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,6 @@ int	main(int argc, char **argv, char **envp)
 		{
 			data.rl = epur(data.rl);
 			main_exec(&data);
-			/*char yo[] = "ab | cdef | v";
-			
-			printf("strtok -> %s\n", strtok(yo, "|"));
-			// printf("yo = %s\n", yo);
-			printf("strtok -> %s\n", strtok(NULL, "|"));
-			// printf("yo = %s\n", yo);
-			
-			printf("%s\n", data.rl);
-			free(data.rl);*/
 		}
 	}
 	all_free(&data, &env, envp);

@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 12:58:47 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/30 17:42:25 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,8 @@ void	handle_signal(int signum);
 void	init(t_data *data, t_env *env, char **envp);
 void	init_data(t_data *data);
 
-
 bool	verif_quote(char *str);
-int		check_quote(char *str, int i);
+bool	check_quote(char *str, size_t *i);
 
 void	main_exec(t_data *data);
 bool	pipe_pars(char *str);

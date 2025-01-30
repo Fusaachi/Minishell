@@ -6,17 +6,20 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 13:52:36 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 15:08:00 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/30 17:37:27 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
 
-void init_strtok(t_tok *t, char *str, const char delimiter)
+void	init_strtok(t_tok *t, char *str, const char delimiter)
 {
-	t->strs = malloc(sizeof(char *) * ft_count_token(str, delimiter) + 1);
-	//	if (!t->strs)
-	//		return ;
+	t->strs = malloc(sizeof(char *) * (ft_count_token(str, delimiter) + 1));
+	t->strs[ft_count_token(str, delimiter)] = NULL;
+	if (!t->strs)
+	{
+		return ;
+	}
 	t->tok = 0;
 	t->i = 0;
 	t->j = 0;
@@ -25,13 +28,13 @@ void init_strtok(t_tok *t, char *str, const char delimiter)
 
 static void	jesaispas(size_t *i, size_t *j, char *str, const char delimiter)
 {
-	char quote;
+	char	quote;
 
 	if (is_quote(str[*i]))
 	{
 		quote = str[(*i)++];
 		(*j)++;
-		while(str[*i] && str[*i] != quote)
+		while (str[*i] && str[*i] != quote)
 		{
 			(*i)++;
 			(*j)++;
@@ -42,7 +45,6 @@ static void	jesaispas(size_t *i, size_t *j, char *str, const char delimiter)
 		(*i)++;
 		(*j)++;
 	}
-
 }
 
 char	**strtoken(char *str, const char delimiter)
@@ -56,15 +58,15 @@ char	**strtoken(char *str, const char delimiter)
 		if (str[t.i] == delimiter)
 			t.i++;
 		if (is_space(str[t.i]))
-			t.tok++;
-		while(str[t.i] && str[t.i] != delimiter)
+			t.i++;
+		while (str[t.i] && str[t.i] != delimiter)
 			jesaispas(&t.i, &t.j, str, delimiter);
 		if (str[t.i - 1] != ' ')
 		{
 			t.strs[t.tok] = malloc(sizeof(char *) * t.j + 1);
 			ft_strlcpy(t.strs[t.tok++], &str [t.i - t.j], t.j + 1);
 		}
-		else 
+		else
 		{
 			t.strs[t.tok] = malloc(sizeof(char *) * t.j);
 			ft_strlcpy(t.strs[t.tok++], &str[t.i - t.j], t.j);
@@ -76,23 +78,19 @@ char	**strtoken(char *str, const char delimiter)
 
 size_t	ft_count_token( char *str, const char delimit)
 {
-	size_t i;
-	size_t nb_tok;
+	size_t	i;
+	size_t	nb_tok;
 
 	nb_tok = 1;
 	i = 0;
-
 	while (str[i])
 	{
 		if (is_quote(str[i]))
-		{
-			i++;
-			while (!is_quote(str[i]))
-				i++;
-		}
-		else if (str[i] == delimit)
+			check_quote(str, &i);
+		if (str[i] == delimit)
 			nb_tok++;
-		i++;
+		if (str[i])
+			i++;
 	}
 	return (nb_tok);
 }
