@@ -6,11 +6,11 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:05:47 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/29 12:43:07 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:07:50 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "utils.h"
 
 bool	is_empty(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:13:44 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/09 14:15:29 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/30 14:45:15 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_signal(int signum)
 {
 	if (signum == SIGINT)
 	{
-		write(1, "\n$>", 3);
+		write(1, "\nMiniPaul>", 10);
 		rl_replace_line("", 0);
 	}
 }

@@ -6,11 +6,11 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:45:25 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/29 10:46:29 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:07:42 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "utils.h"
 
 int	skip_space(char *str)
 {
