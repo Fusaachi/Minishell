@@ -6,22 +6,24 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/27 10:02:38 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/31 09:22:50 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdbool.h>
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <pipe.h>
 # include "signals/signals.h"
 # include "env/env.h"
 # include "utils/utils.h"
 # include "builtin/builtin.h"
 # include "pipe/pipe.h"
+# include "epur/epur.h"
+# include "token/token.h"
 
 enum	e_type
 {
@@ -51,12 +53,13 @@ typedef struct s_data
 
 void	handle_signal(int signum);
 
-
+void	init(t_data *data, t_env *env, char **envp);
 void	init_data(t_data *data);
 
-int		ft_whitespace(char *str);
-int		is_quote(char c);
-int		verif_quote(char *str);
-int		check_quote(char *str, int i);
+bool	verif_quote(char *str);
+bool	check_quote(char *str, size_t *i);
+
+void	main_exec(t_data *data);
+bool	pipe_pars(char *str);
 
 #endif

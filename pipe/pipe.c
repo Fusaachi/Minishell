@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:56:15 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/28 16:54:48 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/01/31 09:23:50 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	pipe_execone(char *command, char **args, t_env *e_first)
 	waitpid(pid, &ret, 0);
 	return (EXIT_SUCCESS);
 }
-
+/*
 int	pipe_outfile(t_pipe spipe)
 {
 	int	fds[2];
@@ -60,3 +60,4 @@ int	pipe_outfile(t_pipe spipe)
 	}
 	return (0);
 }
+*/

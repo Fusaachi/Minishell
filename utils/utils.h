@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:10:02 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/10 15:19:51 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/01/29 12:42:46 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,13 @@
 
 t_env	*free_env(t_data *data, t_env *env);
 void	all_free(t_data *data, t_env *env, char **envp);
+
+bool	is_char(char c);
+bool	is_space(char c);
+bool	is_quote(char c);
+bool	is_empty(char *str);
+
+int		skip_space(char *str);
+int		skip_end(char *str);
 
 #endif

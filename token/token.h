@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 14:09:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 13:07:54 by pgiroux          ###   ########.fr       */
+/*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/01/30 14:43:33 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#ifndef TOKEN_H
+# define TOKEN_H
+# include "../minishell.h"
 
-t_env	*free_env(t_data *data, t_env *env)
+typedef struct s_tok
 {
-	t_env	*tmpnext;
+	char	**strs;
+	char	quote;
+	size_t	tok;
+	size_t	i;
+	size_t	j;
+}t_tok;
 
-	env = data->e_first;
-	while (env != NULL)
-	{
-		tmpnext = env->next;
-		free(env->content);
-		free(env->key);
-		free(env->value);
-		free(env);
-		env = tmpnext;
-	}
-	return (NULL);
-}
+void	init_strtok(t_tok *t, char *str, const char delimiter);
+size_t	ft_count_token( char *str, const char delimit);
+char	**strtoken(char *str, const char delimiter);
 
-void	all_free(t_data *data, t_env *env, char **envp)
-{
-	if (envp[0] != NULL)
-		free_env(data, env);
-}
+#endif

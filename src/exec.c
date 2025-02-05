@@ -1,37 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 13:13:44 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/31 09:28:20 by pfranke          ###   ########.fr       */
+/*   Created: 2025/01/13 15:26:25 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/02/03 10:39:34 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	handle_signal(int signum)
+void	main_exec(t_data *data)
 {
-	if (signum == SIGINT)
+	char	**result;
+
+	if (pipe_pars(data->rl))
 	{
-		write(1, "MiniPaul>", 10);
-		rl_replace_line("", 0);
+		result = strtoken(data->rl, '|');
+		
 	}
 }
 
-void	signals(void)
+bool	pipe_pars(char *str)
 {
-	struct sigaction	sa;
-	struct sigaction	sa1;
+	size_t	i;
 
-	sa.sa_flags = 0;
-	sa1.sa_flags = 0;
-	sigemptyset(&sa.sa_mask);
-	sigemptyset(&sa1.sa_mask);
-	sa.sa_handler = handle_signal;
-	sa1.sa_handler = SIG_IGN;
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa1, NULL);
+	i = 0;
+	while (str[i])
+	{
+		if (is_quote(str[i]))
+			check_quote(str, &i);
+		if (str[i] == '|')
+		{
+			i++;
+			if (str[i] == '|' || !str[i])
+			{
+				ft_putstr_fd("MiniPaul: parse error near `|'\n", 2);
+				return (false);
+			}
+		}
+		if (str[i])
+			i++;
+	}
+	return (true);
 }

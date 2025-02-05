@@ -1,42 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:14:16 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/13 16:26:35 by pgiroux          ###   ########.fr       */
+/*   Created: 2025/01/02 14:42:18 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/01/30 17:41:22 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init(t_data *data, t_env *env, char **envp)
+bool	verif_quote(char *str)
 {
-	init_data(data);
-	if (envp[0] != NULL)
-		init_env(env, data, envp);
-}
+	size_t	i;
 
-void	init_data(t_data *data)
-{
-	data->t_first = NULL;
-	data->e_first = NULL;
-	data->rl = NULL;
-	data->prompt = "MiniPaul>";
-}
-
-/*t_list	*initialistion(void)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(*token));
-	if (token == 0)
+	i = 0;
+	while (str[i])
 	{
-		free(token);
-		exit(EXIT_FAILURE);
-	}	
-	token->token = "";
-	token->next = NULL;
-}*/
+		if (is_quote(str[i]))
+		{
+			if (!check_quote(str, &i))
+			{
+				ft_putstr_fd("Error,\nQuote no closed\n", 2);
+				return (false);
+			}
+		}
+		if (str[i])
+			i++;
+	}
+	return (true);
+}
+
+bool	check_quote(char *str, size_t *i)
+{
+	char	quote;
+
+	quote = str[*i];
+	(*i)++;
+	while (str[*i] && str[*i] != quote)
+		(*i)++;
+	if (str[*i] == '\0')
+		return (false);
+	(*i)++;
+	return (true);
+}

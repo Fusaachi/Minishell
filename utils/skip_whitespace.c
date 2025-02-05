@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   skip_whitespace.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 14:09:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 13:07:54 by pgiroux          ###   ########.fr       */
+/*   Created: 2025/01/29 10:45:25 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/01/30 13:07:42 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-t_env	*free_env(t_data *data, t_env *env)
+int	skip_space(char *str)
 {
-	t_env	*tmpnext;
+	int	i;
 
-	env = data->e_first;
-	while (env != NULL)
-	{
-		tmpnext = env->next;
-		free(env->content);
-		free(env->key);
-		free(env->value);
-		free(env);
-		env = tmpnext;
-	}
-	return (NULL);
+	i = 0;
+	while (is_space(str[i]))
+		i++;
+	return (i);
 }
 
-void	all_free(t_data *data, t_env *env, char **envp)
+int	skip_end(char *str)
 {
-	if (envp[0] != NULL)
-		free_env(data, env);
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	i--;
+	while (is_space(str[i]))
+		i--;
+	return (i);
 }
