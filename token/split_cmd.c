@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   split_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 13:52:36 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 17:37:27 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/05 14:15:43 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
+#include "../minishell.h"
 
-void	init_strtok(t_tok *t, char *str, const char delimiter)
+void	init_strcmd(t_tok *t, char *str, const char delimiter)
 {
-	t->strs = malloc(sizeof(char *) * (ft_count_token(str, delimiter) + 1));
-	t->strs[ft_count_token(str, delimiter)] = NULL;
+	t->strs = malloc(sizeof(char *) * (ft_count_cmd(str, delimiter) + 1));
+	t->strs[ft_count_cmd(str, delimiter)] = NULL;
 	if (!t->strs)
 	{
 		return ;
@@ -47,12 +47,12 @@ static void	jesaispas(size_t *i, size_t *j, char *str, const char delimiter)
 	}
 }
 
-char	**strtoken(char *str, const char delimiter)
+char	**split_cmd(char *str, const char delimiter)
 {
 	t_tok	t;
 
-	init_strtok(&t, str, delimiter);
-	while (t.tok < ft_count_token(str, delimiter))
+	init_strcmd(&t, str, delimiter);
+	while (t.tok < ft_count_cmd(str, delimiter))
 	{
 		t.j = 0;
 		if (str[t.i] == delimiter)
@@ -76,7 +76,7 @@ char	**strtoken(char *str, const char delimiter)
 	return (t.strs);
 }
 
-size_t	ft_count_token( char *str, const char delimit)
+size_t	ft_count_cmd( char *str, const char delimit)
 {
 	size_t	i;
 	size_t	nb_tok;

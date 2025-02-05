@@ -6,13 +6,17 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 14:43:33 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/05 17:04:26 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
 # include "../minishell.h"
+
+typedef struct s_data	t_data;
+typedef struct s_token	t_token;
+typedef struct s_cmd	t_cmd;
 
 typedef struct s_tok
 {
@@ -23,8 +27,43 @@ typedef struct s_tok
 	size_t	j;
 }t_tok;
 
-void	init_strtok(t_tok *t, char *str, const char delimiter);
-size_t	ft_count_token( char *str, const char delimit);
-char	**strtoken(char *str, const char delimiter);
+struct s_cmd
+{
+	char	*content;
+	t_token	*token;
+	t_token	*t_first;
+	t_cmd	*next;
+};
 
+enum	e_type
+{
+	ARG,
+	REDIR_IN,
+	INFILE,
+	REDIR_OUT,
+	OUTFILE,
+	APPEND,
+	HERE_DOC,
+	CMD,
+};
+
+struct s_token
+{
+	enum e_type	type;
+	char		*content;
+	t_token		*next;
+	t_token		*previous;
+};
+
+void	init_strcmd(t_tok *t, char *str, const char delimiter);
+size_t	ft_count_cmd( char *str, const char delimit);
+char	**split_cmd(char *str, const char delimiter);
+
+void	cmd_tok(t_data *data, t_cmd *cmd);
+t_data	*init_cmd(t_cmd *cmd, t_data *data, char **content);
+
+t_data	*init_token(t_token *token, t_data *data, char **content);
+t_token	*new_token(t_token *token, char *content);
+t_cmd	*new_cmd(char *content);
+t_token	*search_type(t_token *token, char *str);
 #endif

@@ -6,11 +6,11 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:10:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/29 10:46:17 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/05 13:16:43 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "epur.h"
+#include "utils.h"
 
 int	len_str(char *str)
 {

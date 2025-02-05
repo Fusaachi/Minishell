@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 17:42:25 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/05 13:26:08 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,18 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "epur/epur.h"
 # include "signals/signals.h"
 # include "env/env.h"
 # include <stdbool.h>
 # include "utils/utils.h"
 # include "token/token.h"
 
-enum	e_type
-{
-	CMD,
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	HERE_DOC,
-	APPEND,
-};
 
-typedef struct s_token	t_token;
-struct s_token
-{
-	enum e_type	type;
-	char		*token;
-	t_token		*next;
-};
 
 typedef struct s_data
 {
-	t_token		*t_first;
 	t_env		*e_first;
+	t_cmd		*c_first;
 	char		*rl;
 	const char	*prompt;
 }t_data;

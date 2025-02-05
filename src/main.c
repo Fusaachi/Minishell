@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 17:41:50 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/05 13:35:46 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 	t_env	env;
+	t_cmd	cmd;
 
 	(void)argv;
 	if (argc != 1)
@@ -35,6 +36,7 @@ int	main(int argc, char **argv, char **envp)
 		if (verif_quote(data.rl))
 		{
 			data.rl = epur(data.rl);
+			cmd_tok(&data, &cmd);
 			main_exec(&data);
 		}
 	}

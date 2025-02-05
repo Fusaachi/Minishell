@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:14:16 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/13 16:26:35 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/05 13:31:32 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init(t_data *data, t_env *env, char **envp)
 
 void	init_data(t_data *data)
 {
-	data->t_first = NULL;
+	data->c_first = NULL;
 	data->e_first = NULL;
 	data->rl = NULL;
 	data->prompt = "MiniPaul>";
