@@ -6,20 +6,14 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 13:52:36 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/05 14:15:43 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:40:38 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init_strcmd(t_tok *t, char *str, const char delimiter)
+void	init_strcmd(t_tok *t)
 {
-	t->strs = malloc(sizeof(char *) * (ft_count_cmd(str, delimiter) + 1));
-	t->strs[ft_count_cmd(str, delimiter)] = NULL;
-	if (!t->strs)
-	{
-		return ;
-	}
 	t->tok = 0;
 	t->i = 0;
 	t->j = 0;
@@ -47,12 +41,15 @@ static void	jesaispas(size_t *i, size_t *j, char *str, const char delimiter)
 	}
 }
 
-char	**split_cmd(char *str, const char delimiter)
+t_cmd *split_cmd(t_data *data, char *str, const char delimiter)
 {
-	t_tok	t;
+	t_tok t;
+	t_cmd *cmd;
 
-	init_strcmd(&t, str, delimiter);
-	while (t.tok < ft_count_cmd(str, delimiter))
+	size_t j;
+	j = -1;
+	init_strcmd(&t);
+	while (++j < ft_count_cmd(str, delimiter))
 	{
 		t.j = 0;
 		if (str[t.i] == delimiter)
@@ -61,36 +58,59 @@ char	**split_cmd(char *str, const char delimiter)
 			t.i++;
 		while (str[t.i] && str[t.i] != delimiter)
 			jesaispas(&t.i, &t.j, str, delimiter);
-		if (str[t.i - 1] != ' ')
-		{
-			t.strs[t.tok] = malloc(sizeof(char *) * t.j + 1);
-			ft_strlcpy(t.strs[t.tok++], &str [t.i - t.j], t.j + 1);
-		}
+		if (j == 0)
+			cmd = init_first(data, str, &t,j);
 		else
 		{
-			t.strs[t.tok] = malloc(sizeof(char *) * t.j);
-			ft_strlcpy(t.strs[t.tok++], &str[t.i - t.j], t.j);
+			cmd->next = init_first(data, str, &t,j);
+			cmd = cmd->next;
 		}
 	}
-	t.strs[t.tok] = NULL;
-	return (t.strs);
+	return (data->c_first);
 }
 
-size_t	ft_count_cmd( char *str, const char delimit)
+size_t ft_count_cmd(char *str, const char delimit)
 {
-	size_t	i;
-	size_t	nb_tok;
+	size_t i;
+	size_t nb_cmd;
 
-	nb_tok = 1;
+	nb_cmd = 1;
 	i = 0;
 	while (str[i])
 	{
 		if (is_quote(str[i]))
 			check_quote(str, &i);
 		if (str[i] == delimit)
-			nb_tok++;
+			nb_cmd++;
 		if (str[i])
 			i++;
 	}
-	return (nb_tok);
+	return (nb_cmd);
+}
+t_cmd *new_cmd(const char *src, size_t size)
+{
+	t_cmd *new;
+
+	new = malloc(sizeof(*new));
+	new->content = malloc(sizeof(char) * size + 1);
+		ft_strlcpy(new->content, src, size);
+	if (!new->content && !new)
+	{
+		free(new);
+		exit(EXIT_FAILURE);
+	}
+	new->next = NULL;
+	return (new);
+}
+t_cmd *init_first(t_data *data, const char *src, t_tok *t, int j)
+{
+	t_cmd *cmd;
+
+	if (src[t->i - 1] != ' ')
+		cmd = new_cmd(&src[t->i - t->j], t->j + 1);
+	else
+		cmd = new_cmd(&src[t->i - t->j], t->j);
+	if (j == 0)
+		data->c_first = cmd;
+	return(cmd);
 }

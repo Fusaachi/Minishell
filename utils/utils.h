@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:10:02 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/05 10:41:16 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/06 11:28:42 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "../minishell.h"
 
+typedef struct s_cmd	t_cmd;
+typedef struct s_token	t_token;
+
 int		len_str(char *str);
 char	*epur_strcpy(char *src, char *dest, int lens, int i);
 int		epur_len(char *str);
@@ -22,6 +25,8 @@ char	*epur(char *str);
 
 t_env	*free_env(t_data *data, t_env *env);
 void	all_free(t_data *data, t_env *env, char **envp);
+void	free_cmd(t_cmd *cmd, t_data *data);
+void	free_tab(char **content);
 
 bool	is_char(char c);
 bool	is_space(char c);
