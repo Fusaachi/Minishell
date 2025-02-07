@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/06 16:37:45 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/07 10:53:42 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_data
 {
 	t_env		*e_first;
 	t_cmd		*c_first;
+	size_t		*nb_cmd;
 	char		*rl;
 	const char	*prompt;
 	int			fd[2];

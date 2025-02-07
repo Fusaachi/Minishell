@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 13:52:36 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/06 17:40:38 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/07 13:57:42 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_strcmd(t_tok *t)
 	t->quote = '\0';
 }
 
-static void	jesaispas(size_t *i, size_t *j, char *str, const char delimiter)
+static void	increment(size_t *i, size_t *j, char *str, const char delimiter)
 {
 	char	quote;
 
@@ -45,11 +45,12 @@ t_cmd *split_cmd(t_data *data, char *str, const char delimiter)
 {
 	t_tok t;
 	t_cmd *cmd;
-
-	size_t j;
-	j = -1;
+	size_t i;
+	
+	i = -1;
+	data->nb_cmd = ft_count_cmd(str, delimiter);
 	init_strcmd(&t);
-	while (++j < ft_count_cmd(str, delimiter))
+	while (++i < data->nb_cmd)
 	{
 		t.j = 0;
 		if (str[t.i] == delimiter)
@@ -57,12 +58,12 @@ t_cmd *split_cmd(t_data *data, char *str, const char delimiter)
 		if (is_space(str[t.i]))
 			t.i++;
 		while (str[t.i] && str[t.i] != delimiter)
-			jesaispas(&t.i, &t.j, str, delimiter);
-		if (j == 0)
-			cmd = init_first(data, str, &t,j);
+			increment(&t.i, &t.j, str, delimiter);
+		if (i == 0)
+			cmd = init_cmd(data, str, &t, i);
 		else
 		{
-			cmd->next = init_first(data, str, &t,j);
+			cmd->next = init_cmd(data, str, &t, i);
 			cmd = cmd->next;
 		}
 	}
@@ -93,16 +94,19 @@ t_cmd *new_cmd(const char *src, size_t size)
 
 	new = malloc(sizeof(*new));
 	new->content = malloc(sizeof(char) * size + 1);
-		ft_strlcpy(new->content, src, size);
+	
+	ft_strlcpy(new->content, src, size);
 	if (!new->content && !new)
 	{
 		free(new);
 		exit(EXIT_FAILURE);
 	}
 	new->next = NULL;
+	new->token = NULL;
+	new->t_first = NULL;
 	return (new);
 }
-t_cmd *init_first(t_data *data, const char *src, t_tok *t, int j)
+t_cmd *init_cmd(t_data *data, const char *src, t_tok *t, int j)
 {
 	t_cmd *cmd;
 

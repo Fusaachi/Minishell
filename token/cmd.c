@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/06 17:41:26 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/07 10:50:05 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ void cmd_tok(t_data *data)
 	{
 		split_cmd(data, data->rl, '|');
 		cmd = data->c_first;
-		//printf("%s\n", cmd->next->content);
 		while (cmd != NULL)
 		{
-			printf("%s\n", cmd->content);
+			printf("%s,\n", cmd->content);
 			cmd = cmd->next;
 		}
 	}

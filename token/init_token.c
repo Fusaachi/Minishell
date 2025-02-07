@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:47:17 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/06 15:07:24 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/07 14:03:18 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,26 @@ t_data	*init_token(t_token *token, t_cmd *cmd, t_data *data,  char **content)
 	return (data);
 }
 
-t_token	*new_token(t_token *token, char *content, int first)
+t_token *new_token(const char *src, size_t size)
+{
+	t_token *new;
+
+	new = malloc(sizeof(*new));
+	new->content = malloc(sizeof(char) * size + 1);
+	
+	ft_strlcpy(new->content, src, size);
+	if (!new->content && !new)
+	{
+		free(new);
+		exit(EXIT_FAILURE);
+	}
+	new->next = NULL;
+	new->type = NULL;
+	//new->previous = NULL
+	return (new);
+}
+
+/*t_token	*new_token(t_token *token, char *content, int first)
 {
 	t_token	*new;
 
@@ -48,26 +67,7 @@ t_token	*new_token(t_token *token, char *content, int first)
 	}
 	new->next = NULL;
 	return (new);
-}
+}*/
 
-t_token	*search_type(t_token *token, char *str, int first)
-{
-	if (str[0] == '-' || is_quote(str[0]))
-		token->type = ARG;
-	else if (strlen(str) == 1 && str[0] == '<')
-		token->type = REDIR_IN;
-	else if (first == 0 && token->previous != NULL && token->previous->type == REDIR_IN)
-		token->type = INFILE;
-	else if (strlen(str) == 1 && str[0] == '>')
-		token->type = REDIR_OUT;
-	else if (first == 0 && token->previous && token->previous->type == REDIR_OUT)
-		token->type = OUTFILE;
-	else if (strlen(str) == 2 && str[0] == '>' && str[1] == '>')
-		token->type = APPEND;
-	else if (strlen(str) == 2 && str[0] == '<' && str[1] == '<')
-		token->type = HERE_DOC;
-	else
-		token->type = CMD;
-	return (token);
-}
+
 

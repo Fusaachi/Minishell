@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:05:47 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 13:07:50 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/07 12:45:14 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ bool	is_space(char c)
 bool	is_char(char c)
 {
 	if (c >= 33 && c <= 127)
+		return (true);
+	return (false);
+}
+
+bool	is_redir(char c)
+{
+	if (c == '>'|| c == '<')
 		return (true);
 	return (false);
 }
