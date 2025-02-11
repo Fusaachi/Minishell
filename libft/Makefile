@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+         #
+#    By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/22 17:00:17 by pgiroux           #+#    #+#              #
-#    Updated: 2024/10/03 13:17:40 by pgiroux          ###   ########.fr        #
+#    Updated: 2025/02/10 17:13:34 by fusaaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ PUT = ft_putchar_fd ft_putstr_fd ft_putnbr_fd ft_putendl_fd
 STR = ft_strchr ft_strlen ft_strnstr ft_strlcpy ft_strncmp ft_strrchr ft_strlcat ft_strdup ft_strjoin ft_strtrim ft_strmapi ft_striteri
 TO = ft_tolower ft_toupper
 GNL = ft_check ft_clearbuffer ft_init ft_strjoin_gnl get_next_line
-PRINTF = ft_countnb_long ft_printf ft_printpointer ft_printunsigned ft_putchar ft_putnbr ft_putnbrbase ft_putstr
 
 IS_DIR = ./ft_is/
 LST_DIR = ./ft_lst/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/07 14:03:54 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/11 13:10:49 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ struct s_token
 	char		*content;
 	t_token		*next;
 	t_token		*previous;
+	bool		first;
 };
 
 void	init_strcmd(t_tok *t);
@@ -61,12 +62,15 @@ t_cmd	*split_cmd(t_data *data, char *str, const char delimiter);
 t_cmd	*new_cmd(const char *src, size_t size);
 t_cmd	*init_cmd(t_data *data, const char *src, t_tok *t, int j);
 
-t_token *new_token(const char *src, size_t size);
 
 void	cmd_tok(t_data *data);
+void	split_token(t_cmd *cmd, char *str);
+void	split_token_redir(t_cmd *cmd, const char *str, size_t len, bool first);
+void	split_token_space(t_cmd *cmd, const char *str, size_t len, bool first);
+t_token	*new_token(const char *src, size_t size);
 //t_data	*init_cmd(t_cmd *cmd, t_data *data, char **content);
 
-t_data	*init_token(t_token *token, t_cmd *cmd, t_data *data, char **content);
+//t_data	*init_token(t_token *token, t_cmd *cmd, t_data *data, char **content);
 //t_token	*new_token(t_token *token, char *content, int first);
 
 t_token	*search_type(t_token *token, char *str, int first);

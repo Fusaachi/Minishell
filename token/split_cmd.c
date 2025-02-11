@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 13:52:36 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/07 13:57:42 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/11 16:08:12 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ t_cmd *new_cmd(const char *src, size_t size)
 
 	new = malloc(sizeof(*new));
 	new->content = malloc(sizeof(char) * size + 1);
-	
 	ft_strlcpy(new->content, src, size);
 	if (!new->content && !new)
 	{
@@ -102,8 +101,9 @@ t_cmd *new_cmd(const char *src, size_t size)
 		exit(EXIT_FAILURE);
 	}
 	new->next = NULL;
-	new->token = NULL;
 	new->t_first = NULL;
+	new->token = NULL;
+	split_token(new, new->content);
 	return (new);
 }
 t_cmd *init_cmd(t_data *data, const char *src, t_tok *t, int j)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:05:47 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/07 12:45:14 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/10 17:15:37 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	is_space(char c)
 
 bool	is_char(char c)
 {
-	if (c >= 33 && c <= 127)
+	if (c >= 33 && c <= 126)
 		return (true);
 	return (false);
 }

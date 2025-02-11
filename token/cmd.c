@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/07 10:50:05 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/11 16:05:08 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void cmd_tok(t_data *data)
 {
 	t_cmd	*cmd;
+	int i;
+	int j;
 
+	i = 1;
 	cmd = NULL;
 	if (pipe_pars(data->rl))
 	{
@@ -23,34 +26,18 @@ void cmd_tok(t_data *data)
 		cmd = data->c_first;
 		while (cmd != NULL)
 		{
-			printf("%s,\n", cmd->content);
+			printf("commande %i, content = %s,\n",i, cmd->content);
+			cmd->token = cmd->t_first;
+			j = 1;
+			while(cmd->token != NULL)
+			{
+				printf("token %d, content = %s,\n", j, cmd->token->content);
+				cmd->token =cmd->token->next;
+				j++;
+			}
 			cmd = cmd->next;
+			i++;
 		}
 	}
 }
 
-
-
-/*t_data	*init_cmd(t_cmd *cmd, t_data *data, char **content)
-{
-	t_token	token;
-	int		i;
-
-	i = 1;
-	cmd = new_cmd(content[0]);
-	printf("commande 0, contenu : %s\n", cmd->content);
-	init_token(&token, cmd, data, split_cmd(cmd->content, ' '));
-	printf("t_first cmd[0] = %p\n", cmd->t_first);
-	data->c_first = cmd;
-	while (content[i])
-	{
-		cmd->next = new_cmd(content[i]);
-		init_token(&token, cmd, data, split_cmd(cmd->next->content, ' '));
-		printf("t_first cmd [%i]= %p\n", i, cmd->t_first);
-		cmd->next->t_first = cmd->next->token;
-		cmd = cmd->next;
-		printf( "commande %d, contenu : %s\n",i , cmd->content);
-		i++;
-	}
-	return (data);
-}*/

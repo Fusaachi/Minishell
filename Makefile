@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+         #
+#    By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 15:16:56 by pgiroux           #+#    #+#              #
-#    Updated: 2025/02/05 15:35:37 by pgiroux          ###   ########.fr        #
+#    Updated: 2025/02/11 11:22:51 by fusaaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FILE = main quote init exec
 SIGNAL = signals
 ENV = env
 UTIL = free is skip_whitespace epur
-TOK = cmd init_token split_cmd
+TOK = cmd split_cmd split_token init_token
 
 GREEN = \033[1;32m
 BLUE= \033[1;34m
@@ -81,7 +81,7 @@ $(OBJ_DIR)%.o: $(TOK_DIR)%.c
 	@echo "$@ : $(GREEN)[OK]$(NC)"
 
 $(NAME): $(LIBFT) $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS) $(TOK_OBJS)
-	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS) $(TOK_OBJS) $(INCLUDE) -o  $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS) $(TOK_OBJS) $(INCLUDE) -o  $(NAME) -lreadline
 	@echo "\n$(BLUE)=============================================$(NC)\n"
 	
 
