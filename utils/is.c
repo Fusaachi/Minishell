@@ -6,7 +6,7 @@
 /*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:05:47 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/10 17:15:37 by fusaaki          ###   ########.fr       */
+/*   Updated: 2025/02/12 17:48:42 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ bool	is_char(char c)
 bool	is_redir(char c)
 {
 	if (c == '>'|| c == '<')
+		return (true);
+	return (false);
+}
+
+bool	is_type(t_token *token)
+{
+	if (token->type == 1 || token->type == 3 || token->type == 5 || token->type == 6)
 		return (true);
 	return (false);
 }

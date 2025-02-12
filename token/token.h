@@ -6,7 +6,7 @@
 /*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/11 13:10:49 by fusaaki          ###   ########.fr       */
+/*   Updated: 2025/02/12 17:52:02 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ struct s_token
 	enum e_type	type;
 	char		*content;
 	t_token		*next;
-	t_token		*previous;
 	bool		first;
 };
 
@@ -68,10 +67,12 @@ void	split_token(t_cmd *cmd, char *str);
 void	split_token_redir(t_cmd *cmd, const char *str, size_t len, bool first);
 void	split_token_space(t_cmd *cmd, const char *str, size_t len, bool first);
 t_token	*new_token(const char *src, size_t size);
+
+int	type_token(t_cmd *cmd, t_data *data);
 //t_data	*init_cmd(t_cmd *cmd, t_data *data, char **content);
 
 //t_data	*init_token(t_token *token, t_cmd *cmd, t_data *data, char **content);
 //t_token	*new_token(t_token *token, char *content, int first);
 
-t_token	*search_type(t_token *token, char *str, int first);
+void	search_type(t_token *token, char *str);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:10:02 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/07 12:51:17 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/12 17:47:48 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ bool	is_space(char c);
 bool	is_quote(char c);
 bool	is_empty(char *str);
 bool	is_redir(char c);
+bool	is_type(t_token *token);
 
 int		skip_space(char *str);
 int		skip_end(char *str);

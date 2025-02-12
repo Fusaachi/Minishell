@@ -35,7 +35,6 @@ void	split_token_space(t_cmd *cmd, const char *str, size_t len, bool first)
 		cmd->token->next = new_token(str, len);
 		cmd->token = cmd->token->next;
 	}	
-		//cmd->token->next->previous = cmd->token;
 }
 	
 
