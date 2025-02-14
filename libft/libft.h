@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:47:38 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 15:20:32 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/14 15:48:58 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 
 # endif
 
-# include<stdio.h>
-# include<stdlib.h>
-# include<unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include <stdarg.h>
 
 typedef struct s_list
 {
 	int				content;
 	struct s_list	*next;
-}t_list;
+}	t_list;
 
 /**
  * @brief Check if the character is alphanumeric (A-Z, a-z, 0-9)

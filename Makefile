@@ -6,7 +6,7 @@
 #    By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 15:16:56 by pgiroux           #+#    #+#              #
-#    Updated: 2025/02/11 11:22:51 by fusaaki          ###   ########.fr        #
+#    Updated: 2025/02/14 16:08:54 by fusaaki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FILE = main quote init exec
 SIGNAL = signals
 ENV = env
 UTIL = free is skip_whitespace epur
-TOK = cmd split_cmd split_token init_token
+TOK = cmd new split_cmd split_token type
 
 GREEN = \033[1;32m
 BLUE= \033[1;34m

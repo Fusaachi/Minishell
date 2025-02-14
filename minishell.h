@@ -6,7 +6,7 @@
 /*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/10 17:21:38 by fusaaki          ###   ########.fr       */
+/*   Updated: 2025/02/14 16:03:55 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include "utils/utils.h"
 # include "token/token.h"
 
-
-
 typedef struct s_data
 {
 	t_env		*e_first;
@@ -32,7 +30,7 @@ typedef struct s_data
 	char		*rl;
 	const char	*prompt;
 	int			fd[2];
-}t_data;
+}	t_data;
 
 void	handle_signal(int signum);
 

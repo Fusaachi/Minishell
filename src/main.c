@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/06 16:53:52 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/14 14:42:28 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv, char **envp)
 			free(data.rl);
 		}
 	}
+	rl_clear_history();
 	all_free(&data, &env, envp);
 	return (0);
 }

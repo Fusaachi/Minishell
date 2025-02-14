@@ -6,19 +6,16 @@
 /*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/12 17:54:47 by fusaaki          ###   ########.fr       */
+/*   Updated: 2025/02/14 16:27:00 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void cmd_tok(t_data *data)
+void	cmd_tok(t_data *data)
 {
 	t_cmd	*cmd;
-	int i;
-	int j;
 
-	i = 1;
 	cmd = NULL;
 	if (pipe_pars(data->rl))
 	{
@@ -26,25 +23,30 @@ void cmd_tok(t_data *data)
 		if (!type_token(cmd, data))
 			printf("error\n");
 		else
-		{
-			cmd = data->c_first;
-			while (cmd != NULL)
-			{
-				printf("commande %i, content = %s,\n",i, cmd->content);
-				cmd->token = cmd->t_first;
-				j = 1;
-				while(cmd->token != NULL)
-				{
-					printf("token %d, content = %s, type = %d\n", j, cmd->token->content, cmd->token->type);
-					cmd->token =cmd->token->next;
-					j++;
-				}
-				cmd = cmd->next;
-				i++;
-			}
-		}
-		
-		
+			print(data, cmd);
+		free_cmd(cmd, data);
 	}
 }
 
+void	print(t_data *data, t_cmd *cmd)
+{
+	int		i;
+	int		j;
+
+	i = 1;
+	cmd = data->c_first;
+	while (cmd != NULL)
+	{
+		printf("commande %i, content = %s,\n", i, cmd->content);
+		cmd->token = cmd->t_first;
+		j = 1;
+		while (cmd->token != NULL)
+		{
+			printf("token %d, content = %s, type = %d\n", j, cmd->token->content, cmd->token->type);
+			cmd->token = cmd->token->next;
+			j++;
+		}
+		cmd = cmd->next;
+		i++;
+	}
+}
