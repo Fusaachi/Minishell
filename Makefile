@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+         #
+#    By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 15:16:56 by pgiroux           #+#    #+#              #
-#    Updated: 2025/02/14 16:08:54 by fusaaki          ###   ########.fr        #
+#    Updated: 2025/02/17 13:20:42 by pgiroux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 
-FILE = main quote init exec
+FILE = main quote init exec init_cmd_exec
 SIGNAL = signals
 ENV = env
 UTIL = free is skip_whitespace epur

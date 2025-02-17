@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/14 16:27:28 by fusaaki          ###   ########.fr       */
+/*   Updated: 2025/02/17 16:07:52 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_t
 struct s_cmd
 {
 	char	*content;
+	size_t	nb_arg;
 	t_token	*token;
 	t_token	*t_first;
 	t_cmd	*next;

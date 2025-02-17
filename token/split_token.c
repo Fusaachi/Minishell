@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:04:49 by fusaaki           #+#    #+#             */
-/*   Updated: 2025/02/14 16:22:25 by fusaaki          ###   ########.fr       */
+/*   Updated: 2025/02/17 16:48:21 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	split_token_space(t_cmd *cmd, const char *str, size_t len, bool first)
 	{
 		cmd->token->next = new_token(str, len);
 		cmd->token = cmd->token->next;
+		cmd->nb_arg += 1;
 	}
 }
 

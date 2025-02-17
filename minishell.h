@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/14 16:03:55 by fusaaki          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:52:43 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,22 @@ typedef struct s_data
 	int			fd[2];
 }	t_data;
 
-void	handle_signal(int signum);
+typedef struct s_cmd_exec
+{
+	char *cmd;
+	char **args;
+}t_cmd_exec;
 
 void	init(t_data *data, t_env *env, char **envp);
 void	init_data(t_data *data);
 
 bool	verif_quote(char *str);
 bool	check_quote(char *str, size_t *i);
+size_t	strcpy_w_quote(char *dest, const char *src, size_t size);
+size_t	len_w_quote(char *str);
+
+void	init_cmd_exec(t_cmd *cmd);
+void	init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec);
 
 void	main_exec(t_data *data);
 bool	pipe_pars(char *str);

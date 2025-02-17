@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/14 16:27:00 by fusaaki          ###   ########.fr       */
+/*   Updated: 2025/02/17 16:07:23 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@ void	cmd_tok(t_data *data)
 	{
 		split_cmd(data, data->rl, '|');
 		if (!type_token(cmd, data))
-			printf("error\n");
+			printf("MiniPaul: parse error near `\n'");
 		else
-			print(data, cmd);
+		{
+			cmd = data->c_first;
+			init_cmd_exec(cmd);
+		}
+			
 		free_cmd(cmd, data);
 	}
 }

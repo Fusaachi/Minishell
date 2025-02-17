@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:02:19 by fusaaki           #+#    #+#             */
-/*   Updated: 2025/02/14 16:02:28 by fusaaki          ###   ########.fr       */
+/*   Updated: 2025/02/17 16:49:51 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_cmd	*new_cmd(const char *src, size_t size)
 	new->next = NULL;
 	new->t_first = NULL;
 	new->token = NULL;
+	new->nb_arg = 0;
 	split_token(new, new->content);
 	return (new);
 }
