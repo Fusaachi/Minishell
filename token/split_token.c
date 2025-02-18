@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:04:49 by fusaaki           #+#    #+#             */
-/*   Updated: 2025/02/18 17:53:58 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 18:05:54 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	split_token(t_cmd *cmd, char *str)
 				t.start++;
 			t.first = false;
 		}
-		else if (is_space(str[t.i + 1]) || str[t.i + 1] == '\0')
+		else if (is_space(str[t.i]) || str[t.i + 1] == '\0')
 		{
 			split_token_space(cmd, &str[t.start], t.i - t.start + 2, t.first);
 			t.start = t.i + 2;
