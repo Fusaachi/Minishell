@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:04:49 by fusaaki           #+#    #+#             */
-/*   Updated: 2025/02/18 17:23:44 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 17:53:58 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ void	split_token(t_cmd *cmd, char *str)
 	t.first = true;
 	while (str[t.i])
 	{
+		while(is_quote(str[t.i]))
+		{
+			if (check_quote(str,&t.i))
+			{
+				if(str[t.i])
+					t.i++;
+			}	
+		}
 		if (is_redir(str[t.i]))
 		{
 			split_token_redir(cmd, &str[t.start], t.i - t.start, t.first);

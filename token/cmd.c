@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 17:03:56 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 17:29:04 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	cmd_tok(t_data *data)
 	if (pipe_pars(data->rl))
 	{
 		split_cmd(data, data->rl, '|');
+		cmd = data->c_first;
+		cmd->token = cmd->t_first;
+		printf("token = %s", cmd->token->content);
 		type_token(cmd, data);
 		if (same_type(cmd, data))
 			return;
