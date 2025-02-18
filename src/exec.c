@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:26:25 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/05 13:14:41 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 12:52:15 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ bool	pipe_pars(char *str)
 		if (str[i] == '|')
 		{
 			i++;
-			if (str[i] == '|' || !str[i])
+			if (str[i] == '|' || !str[i] || str[0] == '|')
 			{
 				ft_putstr_fd("MiniPaul: parse error near `|'\n", 2);
 				return (false);
 			}
 		}
-		if (str[i])
+		else if (str[i])
 			i++;
 	}
 	return (true);

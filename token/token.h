@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 09:57:21 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 13:48:01 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define TOKEN_H
 # include "../minishell.h"
 
-typedef struct s_data	t_data;
-typedef struct s_token	t_token;
-typedef struct s_cmd	t_cmd;
+typedef struct s_data		t_data;
+typedef struct s_token		t_token;
+typedef struct s_cmd		t_cmd;
+typedef struct s_cmd_exec	t_cmd_exec;
 
 typedef struct s_c
 {
@@ -36,11 +37,11 @@ typedef struct s_t
 
 struct s_cmd
 {
-	char	*content;
-	size_t	nb_arg;
-	t_token	*token;
-	t_token	*t_first;
-	t_cmd	*next;
+	char		*content;
+	size_t		nb_arg;
+	t_token		*token;
+	t_token		*t_first;
+	t_cmd		*next;
 };
 
 enum	e_type
@@ -57,7 +58,7 @@ enum	e_type
 
 struct s_token
 {
-	enum e_type	type;
+	//enum e_type	type;
 	char		*content;
 	t_token		*next;
 	bool		first;
