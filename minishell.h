@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 13:51:53 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:15:48 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_cmd_exec
 {
 	char		*cmd;
 	char		**args;
-	//enum e_type	type;
+	enum e_type	type;
 	t_cmd_exec	*next;
 }t_cmd_exec;
 

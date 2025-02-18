@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 13:10:09 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:32:57 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	cmd_tok(t_data *data)
 			cmd_exec = data->cmd_first;
 			while (cmd_exec != NULL)
 			{
-				printf("cmd = %s\n", cmd_exec->cmd);
+				printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
 				i = 0;
-				while (i < cmd->nb_arg)
+				while (i <= cmd->nb_arg)
 				{
 					printf("arg[%zu] = %s,\n", i, cmd_exec->args[i]);
 					i++;
