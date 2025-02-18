@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:26:25 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/03 10:39:34 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:25:11 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,7 @@
 
 void	main_exec(t_data *data)
 {
-	char	**result;
-
-	if (pipe_pars(data->rl))
-	{
-		result = strtoken(data->rl, '|');
-		
-	}
+	(void)data;
 }
 
 bool	pipe_pars(char *str)
@@ -35,13 +29,13 @@ bool	pipe_pars(char *str)
 		if (str[i] == '|')
 		{
 			i++;
-			if (str[i] == '|' || !str[i])
+			if (str[i] == '|' || !str[i] || str[0] == '|')
 			{
 				ft_putstr_fd("MiniPaul: parse error near `|'\n", 2);
 				return (false);
 			}
 		}
-		if (str[i])
+		else if (str[i])
 			i++;
 	}
 	return (true);

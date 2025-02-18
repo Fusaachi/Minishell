@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 17:41:50 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:25:30 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,18 @@ int	main(int argc, char **argv, char **envp)
 		if (data.rl == NULL)
 			break ;
 		if (!is_empty(data.rl))
-			add_history(data.rl);
-		if (verif_quote(data.rl))
 		{
-			data.rl = epur(data.rl);
-			main_exec(&data);
+			add_history(data.rl);
+			if (verif_quote(data.rl))
+			{
+				data.rl = epur(data.rl);
+				cmd_tok(&data);
+				main_exec(&data);
+				free(data.rl);
+			}
 		}
 	}
+	rl_clear_history();
 	all_free(&data, &env, envp);
 	return (0);
 }

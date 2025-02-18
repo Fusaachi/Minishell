@@ -6,7 +6,7 @@
 #    By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 15:16:56 by pgiroux           #+#    #+#              #
-#    Updated: 2025/01/31 09:27:44 by pfranke          ###   ########.fr        #
+#    Updated: 2025/02/18 21:38:03 by pfranke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,13 @@ LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 
-FILE = main quote init exec
+FILE = main quote init exec init_cmd_exec
 SIGNAL = signals
 ENV = env
-UTIL = free is skip_whitespace
+UTIL = free is skip_whitespace epur
 BUILTIN = bt_cd bt_echo bt_env bt_export bt_pwd bt_unset bt_utils
-EPUR = epur
 PIPE = pipe_utils pipe
-TOK = token
+TOK = cmd new split_cmd split_token type
 
 GREEN = \033[1;32m
 BLUE= \033[1;34m
@@ -42,7 +41,6 @@ ENV_DIR = ./env/
 UTIL_DIR = ./utils/
 BUILTIN_DIR = ./builtin/
 PIPE_DIR = ./pipe/
-EPUR_DIR = ./epur/
 TOK_DIR = ./token/
 
 OBJ_DIR = ./obj/
@@ -55,7 +53,6 @@ ENVS = $(addprefix $(ENV_DIR), $(addsuffix .c, $(ENV)))
 UTILS = $(addprefix $(UTIL_DIR), $(addsuffix .c, $(UTIL)))
 BUILTINS = $(addprefix $(BUILTIN_DIR), $(addsuffix .c, $(BUILTIN)))
 PIPES = $(addprefix $(PIPE_DIR), $(addsuffix .c, $(PIPE)))
-EPURS = $(addprefix $(EPUR_DIR), $(addsuffix .c, $(EPUR)))
 TOKS = $(addprefix $(TOK_DIR), $(addsuffix .c, $(TOK)))
 
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILE)))
@@ -64,7 +61,6 @@ ENV_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(ENV)))
 UTIL_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(UTIL)))
 BUILTIN_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(BUILTIN)))
 PIPE_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(PIPE)))
-EPUR_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(EPUR)))
 TOK_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(TOK)))
 
 all : $(NAME)
@@ -103,8 +99,8 @@ $(OBJ_DIR)%.o: $(TOK_DIR)%.c
 	@echo "$@ : $(GREEN)[OK]$(NC)"
 
 
-$(NAME): $(LIBFT) $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS) $(BUILTIN_OBJS) $(PIPE_OBJS) $(EPUR_OBJS) $(TOK_OBJS)
-	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS) $(BUILTIN_OBJS) $(PIPE_OBJS) $(EPUR_OBJS) $(TOK_OBJS) $(INCLUDE) -o  $(NAME) 
+$(NAME): $(LIBFT) $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS) $(BUILTIN_OBJS) $(PIPE_OBJS) $(TOK_OBJS)
+	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(SIGNAL_OBJS) $(ENV_OBJS) $(UTIL_OBJS) $(BUILTIN_OBJS) $(PIPE_OBJS) $(TOK_OBJS) $(INCLUDE) -o  $(NAME) 
 	@echo "\n$(BLUE)=============================================$(NC)\n"
 	
 

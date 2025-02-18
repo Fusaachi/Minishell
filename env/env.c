@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:36:13 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/10 17:27:02 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:23:45 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char	*env_key(char *str)
 	while (str[len] != '=')
 		len++;
 	key = malloc(sizeof(char *) * len + 1);
+	if (!key)
+		perror(NULL);
 	while (i < len)
 	{
 		key[i] = str[i];
@@ -82,5 +84,3 @@ char	*env_value(char *str)
 		len++;
 	return (ft_substr(str, i, len));
 }
-
-

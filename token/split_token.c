@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:04:49 by fusaaki           #+#    #+#             */
-/*   Updated: 2025/02/18 09:57:14 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:25:54 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ void	split_token(t_cmd *cmd, char *str)
 	t.first = true;
 	while (str[t.i])
 	{
+		while(is_quote(str[t.i]))
+		{
+			if (check_quote(str,&t.i))
+			{
+				if(str[t.i])
+					t.i++;
+			}	
+		}
 		if (is_redir(str[t.i]))
 		{
 			split_token_redir(cmd, &str[t.start], t.i - t.start, t.first);
@@ -65,7 +73,7 @@ void	split_token(t_cmd *cmd, char *str)
 				t.start++;
 			t.first = false;
 		}
-		else if (is_space(str[t.i + 1]) || str[t.i + 1] == '\0')
+		else if (is_space(str[t.i]) || str[t.i + 1] == '\0')
 		{
 			split_token_space(cmd, &str[t.start], t.i - t.start + 2, t.first);
 			t.start = t.i + 2;

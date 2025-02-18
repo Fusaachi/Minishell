@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:47:17 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/17 15:01:21 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:26:11 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	type_token(t_cmd *cmd, t_data *data)
+void	type_token(t_cmd *cmd, t_data *data)
 {
 	bool	first;
 
@@ -23,16 +23,12 @@ int	type_token(t_cmd *cmd, t_data *data)
 		first = true;
 		while (cmd->token)
 		{
-			if (cmd->token->type == 0)
-				search_type(cmd->token, cmd->token->content, first);
-			if (is_type(cmd->token) && cmd->token->next == NULL)
-				return (0);
+			search_type(cmd->token, cmd->token->content, first);
 			first = false;
 			cmd->token = cmd->token->next;
 		}
 		cmd = cmd->next;
 	}
-	return (1);
 }
 
 void	search_type(t_token *token, char *str, bool first)
@@ -61,8 +57,33 @@ void	search_type(t_token *token, char *str, bool first)
 
 bool	is_type(t_token *token)
 {
-	if (token->type == 1 || token->type == 3
-		|| token->type == 5 || token->type == 6)
+	if (token->type == REDIR_IN || token->type == REDIR_OUT
+		|| token->type == APPEND || token->type == HERE_DOC)
 		return (true);
+	return (false);
+}
+
+bool	same_type(t_cmd *cmd, t_data *data)
+{
+	cmd = data->c_first;
+	while (cmd != NULL)
+	{
+		cmd->token = cmd->t_first;
+		while (cmd->token != NULL)
+		{
+			if (is_type(cmd->token) && cmd->token->next != NULL && is_type(cmd->token->next))
+			{
+				printf("MiniPaul: parse error near `%s'\n", cmd->token->next->content);
+				return (true);
+			}
+			if (is_type(cmd->token) && cmd->token->next == NULL)
+			{
+				printf("MiniPaul: parse error near `'\n");
+				return (true);
+			}
+			cmd->token = cmd->token->next;
+		}
+		cmd = cmd->next;
+	}
 	return (false);
 }

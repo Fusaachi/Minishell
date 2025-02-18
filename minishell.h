@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/31 09:22:50 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:34:09 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,42 @@
 # include "utils/utils.h"
 # include "builtin/builtin.h"
 # include "pipe/pipe.h"
-# include "epur/epur.h"
 # include "token/token.h"
-
-enum	e_type
-{
-	CMD,
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	HERE_DOC,
-	APPEND,
-};
-
-typedef struct s_token	t_token;
-struct s_token
-{
-	enum e_type	type;
-	char		*token;
-	t_token		*next;
-};
+# include "utils/utils.h"
+# include "token/token.h"
 
 typedef struct s_data
 {
-	t_token		*t_first;
 	t_env		*e_first;
+	t_cmd		*c_first;
+	t_cmd_exec	*cmd_first;
+	size_t		nb_cmd;
 	char		*rl;
 	const char	*prompt;
-}t_data;
+	int			fd[2];
+}	t_data;
 
-void	handle_signal(int signum);
+typedef struct s_cmd_exec
+{
+	char		*cmd;
+	char		**args;
+	enum e_type	type;
+	t_cmd_exec	*next;
+}t_cmd_exec;
 
-void	init(t_data *data, t_env *env, char **envp);
-void	init_data(t_data *data);
+void		init(t_data *data, t_env *env, char **envp);
+void		init_data(t_data *data);
 
-bool	verif_quote(char *str);
-bool	check_quote(char *str, size_t *i);
+bool		verif_quote(char *str);
+bool		check_quote(char *str, size_t *i);
+size_t		strcpy_w_quote(char *dest, const char *src, size_t size);
+size_t		len_w_quote(char *str);
 
-void	main_exec(t_data *data);
-bool	pipe_pars(char *str);
+void		init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec);
+t_cmd_exec	*init_cmd_exec(t_data *data, t_cmd *cmd);
+t_cmd_exec	*new_cmd_exec(t_cmd *cmd);
+
+void		main_exec(t_data *data);
+bool		pipe_pars(char *str);
 
 #endif

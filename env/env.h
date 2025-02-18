@@ -6,12 +6,14 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:32:56 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/10 17:40:37 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:23:21 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
+
+# include "../minishell.h"
 
 typedef struct s_data	t_data;
 typedef struct s_env	t_env;
