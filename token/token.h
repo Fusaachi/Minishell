@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 13:48:01 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/18 13:51:43 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ enum	e_type
 
 struct s_token
 {
-	//enum e_type	type;
+	enum e_type	type;
 	char		*content;
 	t_token		*next;
 	bool		first;
