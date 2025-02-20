@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:47:17 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/20 14:07:59 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/20 14:37:00 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	type_token(t_cmd *cmd, t_data *data)
 		first = true;
 		while (cmd->token)
 		{
-			printf ("\nCONTENT = %s\n", cmd->token->content);
 			search_type(cmd, cmd->token, cmd->token->content, first);
 			first = false;
 			cmd->token = cmd->token->next;
@@ -54,7 +53,6 @@ void	search_type(t_cmd *cmd, t_token *token, char *str, bool first)
 		token->type = APPEND;
 	else if (strlen(str) == 2 && str[0] == '<' && str[1] == '<')
 		token->type = HERE_DOC;
-	printf("TYPE = %u\n", token->type);
 	if (token->type == ARG) 
 		cmd->nb_arg += 1;
 }

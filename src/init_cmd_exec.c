@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:08:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/20 14:02:15 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/20 16:40:19 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_cmd_exec *init_cmd_exec(t_data *data, t_cmd *cmd)
 	cmd = data->c_first;
 	while (++i < data->nb_cmd)
 	{
+		printf("PRINT\n");
 		if (i == 0)
 		{
 			cmd_exec = new_cmd_exec(cmd);
@@ -34,6 +35,7 @@ t_cmd_exec *init_cmd_exec(t_data *data, t_cmd *cmd)
 			cmd = cmd->next;
 		}
 	}
+	cmd = data->c_first;
 	return (data->cmd_first);
 }
 
@@ -52,8 +54,7 @@ t_cmd_exec	*new_cmd_exec(t_cmd *cmd)
 	new->type = cmd->token->type;
 	new->cmd = malloc (sizeof(char *) * len + 1);
 	strcpy_w_quote(new->cmd, cmd->token->content, len + 1);
-	//if (cmd->next && cmd->next->token->type == ARG)
-		//init_arg_exec(cmd, new);
+	init_arg_exec(cmd, new);
 	return (new);
 }
 void	init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec)
@@ -62,18 +63,23 @@ void	init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec)
 	size_t	len;
 
 	i = 1;
-	cmd_exec->args = malloc(sizeof(char **) * cmd->nb_arg + 1);
+	cmd_exec->args = malloc(sizeof(char *) * (cmd->nb_arg + 2));
 	len = len_w_quote(cmd->token->content);
-	cmd_exec->args[0] = malloc(sizeof(char *) * len + 1);
+	cmd_exec->args[0] = malloc(sizeof(char) * (len + 1));
+	printf("CONTENT = %s",cmd->token->content);
 	strcpy_w_quote(cmd_exec->args[0], cmd->token->content, len);
-	cmd->token = cmd->token->next;
-	while (i <= cmd->nb_arg && cmd->token->type == 0)
+	printf("args[0] = %s", cmd_exec->args[0]);
+	if (cmd->next && cmd->next->token->type == ARG)
+		cmd->token = cmd->token->next;
+	while (i < cmd->nb_arg && cmd->token->type == ARG)
 	{
+		printf("nb args %zu\ntokentype = fuck %u\n", cmd->nb_arg, cmd->token->type);
 		len = len_w_quote(cmd->token->content);
 		cmd_exec->args[i] = malloc(sizeof(char *) * len + 1);
 		strcpy_w_quote(cmd_exec->args[i], cmd->token->content, len);
 		cmd->token = cmd->token->next;
 		i++;
 	}
+	cmd_exec->args[i] = NULL;
 }
 

@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:10:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/05 13:16:43 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:34:09 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ char	*epur(char *str)
 	new_str = NULL;
 	len = epur_len(str);
 	new_str = epur_strcpy(str, new_str, len, 0);
+	free(str);
 	return (new_str);
 }
