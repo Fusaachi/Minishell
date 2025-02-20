@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:47:38 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 21:31:38 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/19 16:26:15 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -619,16 +619,6 @@ int		ft_putstr(char *str);
  */
 int		ft_putparams(const char *format, int *i, int count, va_list ap);
 
-/**
- * @brief Compares two strings lexicographically.
- * 
- * @param s1 The first string to compare.
- * 
- * @param s2 The second string to compare.
- * 
- * This function compares the two strings `s1` and `s2` and returns an integer
- * representing the difference between the first differing characters in the
- */
-int		ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif

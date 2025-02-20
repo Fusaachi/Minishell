@@ -6,7 +6,7 @@
 #    By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/22 17:00:17 by pgiroux           #+#    #+#              #
-#    Updated: 2025/02/18 21:24:45 by pfranke          ###   ########.fr        #
+#    Updated: 2025/02/19 16:28:49 by pfranke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LST = ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast ft_lstadd_back ft_lstdelon
 MEM = ft_memcmp ft_memmove ft_memchr ft_memcpy ft_memset
 OTHER =	ft_bzero ft_atol ft_calloc ft_split ft_itoa ft_substr ft_free
 PUT = ft_putchar_fd ft_putstr_fd ft_putnbr_fd ft_putendl_fd
-STR = ft_strchr ft_strlen ft_strnstr ft_strlcpy ft_strncmp ft_strrchr ft_strlcat ft_strdup ft_strjoin ft_strtrim ft_strmapi ft_striteri
+STR = ft_strchr ft_strlen ft_strnstr ft_strlcpy ft_strncmp ft_strrchr ft_strlcat ft_strdup ft_strjoin ft_strcmp ft_strtrim ft_strmapi ft_striteri
 TO = ft_tolower ft_toupper
 GNL = ft_check ft_clearbuffer ft_init ft_strjoin_gnl get_next_line
 

@@ -6,15 +6,13 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:08:21 by pfranke           #+#    #+#             */
-/*   Updated: 2025/02/18 21:38:53 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/19 16:19:42 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //Sorts by ASCII order and prints the strings sorted
 
 #include "../minishell.h"
-
-int		ft_strcmp(const char *s1, const char *s2);
 
 //Copies a double array of strings, and mallocs it
 

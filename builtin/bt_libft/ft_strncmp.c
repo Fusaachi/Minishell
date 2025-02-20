@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 21:49:36 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/08 12:39:15 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/19 16:20:58 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,3 @@ int	ft_strncmp(const char *str1, const char *str2, size_t num)
 	return (*(unsigned char *)str1 - *(unsigned char *)str2);
 }
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s1)
-		return (1);
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (0);
-}
