@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:08:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 17:02:59 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/20 14:02:15 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ t_cmd_exec	*new_cmd_exec(t_cmd *cmd)
 	new->type = cmd->token->type;
 	new->cmd = malloc (sizeof(char *) * len + 1);
 	strcpy_w_quote(new->cmd, cmd->token->content, len + 1);
-	//init_arg_exec(cmd, new);
+	//if (cmd->next && cmd->next->token->type == ARG)
+		//init_arg_exec(cmd, new);
 	return (new);
 }
 void	init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec)

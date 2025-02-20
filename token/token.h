@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 16:46:13 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/20 13:59:57 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	split_token_redir(t_cmd *cmd, const char *str, size_t len, bool first);
 void	split_token_space(t_cmd *cmd, const char *str, size_t len, bool first);
 void	split_token(t_cmd *cmd, char *str);
 
-void		type_token(t_cmd *cmd, t_data *data);
-void	search_type(t_token *token, char *str, bool first);
+void	type_token(t_cmd *cmd, t_data *data);
+void	search_type(t_cmd *cmd,t_token *token, char *str, bool first);
 bool	is_type(t_token *token);
 bool	same_type(t_cmd *cmd, t_data *data);
 
