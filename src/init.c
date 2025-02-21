@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:14:16 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 10:31:18 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/21 10:12:53 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,3 @@ void	init_data(t_data *data)
 	data->rl = NULL;
 	data->prompt = "MiniPaul>";
 }
-
-/*t_list	*initialistion(void)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(*token));
-	if (token == 0)
-	{
-		free(token);
-		exit(EXIT_FAILURE);
-	}	
-	token->token = "";
-	token->next = NULL;
-}*/

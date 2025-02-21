@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/20 16:42:48 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/21 12:31:30 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,17 @@ void	cmd_tok(t_data *data)
 		cmd->token = cmd->t_first;
 		type_token(cmd, data);
 		if (same_type(cmd, data))
-			return;
+			return ;
 		cmd = data->c_first;
 		init_cmd_exec(data, cmd);
 		cmd_exec = data->cmd_first;
 		while (cmd_exec != NULL)
 		{
 			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
-			printf( "nb d'arg = %zu", cmd->nb_arg);
 			i = 0;
 			/*while (i <= cmd->nb_arg)
 			{
-				printf("arg[%zu] = %s,\n", i, cmd_exec->args[i]);
+				printf("arg[%zu] = %s, type = %u\n", i, cmd_exec->args[i]);
 				i++;
 			}*/
 			cmd = cmd->next;
@@ -49,7 +48,6 @@ void	cmd_tok(t_data *data)
 		free_cmd(cmd, data);
 		free_cmd_exec(cmd_exec, data);
 	}
-	
 }
 
 void	print(t_data *data, t_cmd *cmd)

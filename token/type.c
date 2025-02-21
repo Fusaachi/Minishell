@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:47:17 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/20 14:37:00 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/21 11:08:53 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	type_token(t_cmd *cmd, t_data *data)
 		while (cmd->token)
 		{
 			search_type(cmd, cmd->token, cmd->token->content, first);
+			printf("TOKEN %s = %u\n", cmd->token->content, cmd->token->type);
 			first = false;
 			cmd->token = cmd->token->next;
 		}
@@ -53,7 +54,7 @@ void	search_type(t_cmd *cmd, t_token *token, char *str, bool first)
 		token->type = APPEND;
 	else if (strlen(str) == 2 && str[0] == '<' && str[1] == '<')
 		token->type = HERE_DOC;
-	if (token->type == ARG) 
+	if (token->type == ARG)
 		cmd->nb_arg += 1;
 }
 
@@ -67,14 +68,19 @@ bool	is_type(t_token *token)
 
 bool	same_type(t_cmd *cmd, t_data *data)
 {
+	//char	*temp;
+
 	cmd = data->c_first;
 	while (cmd != NULL)
 	{
 		cmd->token = cmd->t_first;
 		while (cmd->token != NULL)
 		{
-			if (is_type(cmd->token) && cmd->token->next != NULL && is_type(cmd->token->next))
+			printf( "PRINT TYPE = %u\n", cmd->token->type);
+			if (is_type(cmd->token) && cmd->token->next != NULL
+				&& is_type(cmd->token->next))
 			{
+				//temp = cmd->token->next->content;
 				printf("MiniPaul: parse error near `%s'\n", cmd->token->next->content);
 				return (true);
 			}
