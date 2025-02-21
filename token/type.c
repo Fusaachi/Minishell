@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:47:17 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/21 11:08:53 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/21 14:39:02 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	type_token(t_cmd *cmd, t_data *data)
 		first = true;
 		while (cmd->token)
 		{
-			search_type(cmd, cmd->token, cmd->token->content, first);
+			if (cmd->token->type != INFILE && cmd->token->type != OUTFILE)
+				search_type(cmd, cmd->token, cmd->token->content, first);
 			printf("TOKEN %s = %u\n", cmd->token->content, cmd->token->type);
 			first = false;
 			cmd->token = cmd->token->next;
@@ -68,8 +69,6 @@ bool	is_type(t_token *token)
 
 bool	same_type(t_cmd *cmd, t_data *data)
 {
-	//char	*temp;
-
 	cmd = data->c_first;
 	while (cmd != NULL)
 	{
@@ -80,7 +79,6 @@ bool	same_type(t_cmd *cmd, t_data *data)
 			if (is_type(cmd->token) && cmd->token->next != NULL
 				&& is_type(cmd->token->next))
 			{
-				//temp = cmd->token->next->content;
 				printf("MiniPaul: parse error near `%s'\n", cmd->token->next->content);
 				return (true);
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 21:32:35 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/21 12:33:30 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	cmd_tok(t_data *data)
 		printf("token = %s", cmd->token->content);
 		type_token(cmd, data);
 		if (same_type(cmd, data))
-			return;
+			return ;
 		cmd = data->c_first;
 		init_cmd_exec(data, cmd);
 		cmd_exec = data->cmd_first;

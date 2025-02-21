@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:09:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/20 15:58:21 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/21 14:11:35 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	free_cmd(t_cmd *cmd, t_data *data)
 
 void	free_cmd_exec(t_cmd_exec *cmd, t_data *data)
 {
-	//t_token		*tmp;
 	t_cmd_exec	*c_tmp;
 	size_t		i;
 
