@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:08:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/20 14:30:34 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/20 14:42:19 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec)
 	cmd_exec->args = malloc(sizeof(char **) * cmd->nb_arg + 1);
 	len = len_w_quote(cmd->token->content);
 	cmd_exec->args[0] = malloc(sizeof(char *) * len + 1);
-	strcpy_w_quote  (cmd_exec->args[0], cmd->token->content, len);
+	strcpy_w_quote(cmd_exec->args[0], cmd->token->content, len);
 	cmd->token = cmd->token->next;
 	while (i <= cmd->nb_arg && cmd->token->type == 0)
 	{
