@@ -6,7 +6,11 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/02/18 21:26:02 by pfranke          ###   ########.fr       */
+=======
+/*   Updated: 2025/02/21 12:26:35 by pgiroux          ###   ########.fr       */
+>>>>>>> Fusaaki
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +82,11 @@ t_cmd	*init_cmd(t_data *data, const char *src, t_c *c, int j);
 void	split_token_redir(t_cmd *cmd, const char *str, size_t len, bool first);
 void	split_token_space(t_cmd *cmd, const char *str, size_t len, bool first);
 void	split_token(t_cmd *cmd, char *str);
+void	in_the_quote(char *str, t_t *t);
+void	for_the_redir(char *str, t_t *t);
 
-void		type_token(t_cmd *cmd, t_data *data);
-void	search_type(t_token *token, char *str, bool first);
+void	type_token(t_cmd *cmd, t_data *data);
+void	search_type(t_cmd *cmd, t_token *token, char *str, bool first);
 bool	is_type(t_token *token);
 bool	same_type(t_cmd *cmd, t_data *data);
 

@@ -6,7 +6,11 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:04:49 by fusaaki           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/02/18 21:25:54 by pfranke          ###   ########.fr       */
+=======
+/*   Updated: 2025/02/21 14:51:26 by pgiroux          ###   ########.fr       */
+>>>>>>> Fusaaki
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +46,6 @@ void	split_token_space(t_cmd *cmd, const char *str, size_t len, bool first)
 	{
 		cmd->token->next = new_token(str, len);
 		cmd->token = cmd->token->next;
-		cmd->nb_arg += 1;
 	}
 }
 
@@ -55,30 +58,55 @@ void	split_token(t_cmd *cmd, char *str)
 	t.first = true;
 	while (str[t.i])
 	{
-		while(is_quote(str[t.i]))
+		if (is_quote(str[t.i]))
 		{
-			if (check_quote(str,&t.i))
+			while (is_quote(str[t.i]))
 			{
-				if(str[t.i])
-					t.i++;
-			}	
+				if (check_quote(str, &t.i))
+				{
+					if (str[t.i])
+						t.i++;
+				}	
+			}
 		}
+			//in_the_quote(str, &t);
 		if (is_redir(str[t.i]))
 		{
 			split_token_redir(cmd, &str[t.start], t.i - t.start, t.first);
-			if (str[t.i] == str[t.i + 1])
-				t.i++;
-			t.start = t.i + 1;
-			if (is_space(str[t.start]))
-				t.start++;
-			t.first = false;
+			for_the_redir(str, &t);
 		}
-		else if (is_space(str[t.i]) || str[t.i + 1] == '\0')
+		else if (!str[t.i] || is_space(str[t.i]) || str[t.i + 1] == '\0')
 		{
 			split_token_space(cmd, &str[t.start], t.i - t.start + 2, t.first);
-			t.start = t.i + 2;
+			t.start = t.i + 1;
 			t.first = false;
 		}
-		t.i++;
+		if (str[t.i])
+			t.i++;
 	}
+}
+
+void	in_the_quote(char *str, t_t *t)
+{
+	while (is_quote(str[t->i]))
+	{
+		if (check_quote(str, &t->i))
+		{
+			if (str[t->i])
+				t->i++;
+		}	
+	}
+}
+
+void	for_the_redir(char *str, t_t *t)
+{
+	if (str[t->i] == str[t->i + 1])
+		t->i++;
+	t->start = t->i + 1;
+	if (str[t->start] && is_space(str[t->start]))
+	{
+		t->i++;
+		t->start++;
+	}
+	t->first = false;
 }

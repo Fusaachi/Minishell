@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/20 13:09:09 by pfranke          ###   ########.fr       */
-=======
-/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/22 09:38:37 by fusaaki          ###   ########.fr       */
->>>>>>> Fusaaki
+/*   Updated: 2025/02/21 12:33:30 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +16,7 @@ void	cmd_tok(t_data *data)
 {
 	t_cmd		*cmd;
 	t_cmd_exec	*cmd_exec;
-	//size_t		i;
 
-	//i = 0;
 	cmd = NULL;
 	cmd_exec = NULL;
 	if (pipe_pars(data->rl))
@@ -33,6 +24,7 @@ void	cmd_tok(t_data *data)
 		split_cmd(data, data->rl, '|');
 		cmd = data->c_first;
 		cmd->token = cmd->t_first;
+		printf("token = %s", cmd->token->content);
 		type_token(cmd, data);
 		if (same_type(cmd, data))
 			return ;
@@ -42,19 +34,17 @@ void	cmd_tok(t_data *data)
 		while (cmd_exec != NULL)
 		{
 			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
-			/*i = 0;
-			while (i <= cmd->nb_arg)
+			/*while (i <= cmd->nb_arg)
 			{
-				printf("arg[%zu] = %s, type = %s\n", i, cmd_exec->args[i]);
+				printf("arg[%zu] = %s,\n", i, cmd_exec->args[i]);
 				i++;
 			}*/
 			cmd = cmd->next;
 			cmd_exec = cmd_exec->next;
 			printf("\n");
 		}
-		free_cmd(cmd, data);
-		free_cmd_exec(cmd_exec, data);
 	}
+	free_cmd(cmd, data);
 }
 
 void	print(t_data *data, t_cmd *cmd)

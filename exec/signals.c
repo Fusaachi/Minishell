@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:14:16 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/22 19:28:42 by pfranke          ###   ########.fr       */
+/*   Created: 2025/01/08 13:13:44 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/02/18 21:25:02 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init(t_data *data, t_env *env, char **envp)
+static void	handle_sigint(int signum)
 {
-	init_data(data);
-	if (envp[0] != NULL)
-		init_env(env, data, envp);
+	if (signum == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
-void	init_data(t_data *data)
+void	signals(void)
 {
-	data->c_first = NULL;
-	data->e_first = NULL;
-	data->rl = NULL;
-	data->prompt = "MiniPaul>";
+	struct sigaction	sa;
+	struct sigaction	sa1;
+
+	sa.sa_flags = 0;
+	sa1.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
+	sigemptyset(&sa1.sa_mask);
+	sa.sa_handler = handle_sigint;
+	sa1.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa1, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/17 14:54:12 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/21 10:13:02 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	main(int argc, char **argv, char **envp)
 				data.rl = epur(data.rl);
 				cmd_tok(&data);
 				main_exec(&data);
-				free(data.rl);
 			}
 		}
+		free(data.rl);
 	}
 	rl_clear_history();
 	all_free(&data, &env, envp);

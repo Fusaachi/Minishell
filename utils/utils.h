@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:10:02 by pgiroux           #+#    #+#             */
 /*   Updated: 2025/02/18 21:26:29 by pfranke          ###   ########.fr       */
+=======
+/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 14:10:02 by pgiroux           #+#    #+#             */
+/*   Updated: 2025/02/21 14:12:10 by pgiroux          ###   ########.fr       */
+>>>>>>> Fusaaki
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +22,9 @@
 
 # include "../minishell.h"
 
-typedef struct s_cmd	t_cmd;
-typedef struct s_token	t_token;
+typedef struct s_cmd_exec	t_cmd_exec;
+typedef struct s_cmd		t_cmd;
+typedef struct s_token		t_token;
 
 int		len_str(char *str);
 char	*epur_strcpy(char *src, char *dest, int lens, int i);
@@ -26,7 +34,7 @@ char	*epur(char *str);
 t_env	*free_env(t_data *data, t_env *env);
 void	all_free(t_data *data, t_env *env, char **envp);
 void	free_cmd(t_cmd *cmd, t_data *data);
-void	free_tab(char **content);
+void	free_cmd_exec(t_cmd_exec *cmd_exec, t_data *data);
 
 bool	is_char(char c);
 bool	is_space(char c);

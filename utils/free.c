@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:09:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 21:26:18 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:28:46 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,28 @@ void	free_cmd(t_cmd *cmd, t_data *data)
 		}
 		c_tmp = cmd->next;
 		free(cmd->content);
+		free(cmd);
+		cmd = c_tmp;
+	}
+}
+
+void	free_cmd_exec(t_cmd_exec *cmd, t_data *data)
+{
+	t_cmd_exec	*c_tmp;
+	size_t		i;
+
+	cmd = data->cmd_first;
+	while (cmd != NULL)
+	{
+		i = 0;
+		while (cmd->args[i])
+		{
+			free(cmd->args[i]);
+			i++;
+		}
+		free(cmd->args);
+		c_tmp = cmd->next;
+		free(cmd->cmd);
 		free(cmd);
 		cmd = c_tmp;
 	}
