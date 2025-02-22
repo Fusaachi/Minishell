@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/21 12:31:30 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/22 09:38:37 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	cmd_tok(t_data *data)
 {
 	t_cmd		*cmd;
 	t_cmd_exec	*cmd_exec;
-	size_t		i;
+	//size_t		i;
 
-	i = 0;
+	//i = 0;
 	cmd = NULL;
 	cmd_exec = NULL;
 	if (pipe_pars(data->rl))
@@ -35,10 +35,10 @@ void	cmd_tok(t_data *data)
 		while (cmd_exec != NULL)
 		{
 			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
-			i = 0;
-			/*while (i <= cmd->nb_arg)
+			/*i = 0;
+			while (i <= cmd->nb_arg)
 			{
-				printf("arg[%zu] = %s, type = %u\n", i, cmd_exec->args[i]);
+				printf("arg[%zu] = %s, type = %s\n", i, cmd_exec->args[i]);
 				i++;
 			}*/
 			cmd = cmd->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:47:17 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/21 14:39:02 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/22 09:34:29 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,24 @@ void	search_type(t_cmd *cmd, t_token *token, char *str, bool first)
 {
 	if (first == 1)
 		token->type = CMD;
-	if (strlen(token->content) == 1 && str[0] == '<')
+	if ((strlen(str) == 1 || strlen(str) == 2) && str[0] == '<')
 	{
 		token->type = REDIR_IN;
+		if (str[1] == '<')
+			token->type = HERE_DOC;
 		if (token->next == NULL)
 			return ;
 		token->next->type = INFILE;
 	}
-	else if (strlen(str) == 1 && str[0] == '>')
+	else if ((strlen(str) == 1 || strlen(str) == 2) && str[0] == '>')
 	{
 		token->type = REDIR_OUT;
+		if (str[1] == '>')
+			token->type = APPEND;
 		if (token->next == NULL)
 			return ;
 		token->next->type = OUTFILE;
 	}
-	else if (strlen(str) == 2 && str[0] == '>' && str[1] == '>')
-		token->type = APPEND;
-	else if (strlen(str) == 2 && str[0] == '<' && str[1] == '<')
-		token->type = HERE_DOC;
 	if (token->type == ARG)
 		cmd->nb_arg += 1;
 }
@@ -75,7 +75,6 @@ bool	same_type(t_cmd *cmd, t_data *data)
 		cmd->token = cmd->t_first;
 		while (cmd->token != NULL)
 		{
-			printf( "PRINT TYPE = %u\n", cmd->token->type);
 			if (is_type(cmd->token) && cmd->token->next != NULL
 				&& is_type(cmd->token->next))
 			{

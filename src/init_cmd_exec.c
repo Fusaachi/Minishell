@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd_exec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:08:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/21 10:12:22 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/22 09:35:27 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ t_cmd_exec	*new_cmd_exec(t_cmd *cmd)
 {
 	t_cmd_exec	*new;
 	size_t		len;
-	size_t		i;
 
-	i = 0;
 	new = malloc(sizeof(*new));
 	cmd->token = cmd->t_first;
 	len = len_w_quote(cmd->token->content);
