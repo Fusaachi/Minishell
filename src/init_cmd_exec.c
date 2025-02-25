@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:08:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/21 10:12:22 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/25 17:15:24 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,10 @@ void	init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec)
 	cmd_exec->args = malloc(sizeof(char *) * (cmd->nb_arg + 2));
 	len = len_w_quote(cmd->token->content);
 	cmd_exec->args[0] = malloc(sizeof(char) * (len + 1));
-	printf("CONTENT = %s", cmd->token->content);
 	strcpy_w_quote(cmd_exec->args[0], cmd->token->content, len);
-	printf("args[0] = %s", cmd_exec->args[0]);
-	if (cmd->next && cmd->next->token->type == ARG)
+	if (cmd->token->next && cmd->token->next->type == ARG)
 		cmd->token = cmd->token->next;
-	while (i < cmd->nb_arg && cmd->token->type == ARG)
+	while (i <= cmd->nb_arg && cmd->token->type == ARG)
 	{
 		len = len_w_quote(cmd->token->content);
 		cmd_exec->args[i] = malloc(sizeof(char *) * len + 1);

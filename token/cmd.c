@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/21 12:31:30 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/25 17:16:41 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,29 @@ void	cmd_tok(t_data *data)
 		if (same_type(cmd, data))
 			return ;
 		cmd = data->c_first;
-		init_cmd_exec(data, cmd);
-		cmd_exec = data->cmd_first;
+		cmd->token = cmd->t_first;
+		if (cmd->token->type == CMD)
+		{
+			init_cmd_exec(data, cmd);
+			cmd_exec = data->cmd_first;
+		}
+		//if (is_type(cmd->token->type))
 		while (cmd_exec != NULL)
 		{
 			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
 			i = 0;
-			/*while (i <= cmd->nb_arg)
+			while (cmd_exec->args[i])
 			{
-				printf("arg[%zu] = %s, type = %u\n", i, cmd_exec->args[i]);
+				printf("arg[%zu] = %s", i, cmd_exec->args[i]);
 				i++;
-			}*/
+			}
 			cmd = cmd->next;
 			cmd_exec = cmd_exec->next;
 			printf("\n");
 		}
 		free_cmd(cmd, data);
-		free_cmd_exec(cmd_exec, data);
+		if (data->cmd_first != NULL)
+			free_cmd_exec(cmd_exec, data);
 	}
 }
 

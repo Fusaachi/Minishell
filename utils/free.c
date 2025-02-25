@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:09:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/21 14:11:35 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/25 17:13:56 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ void	free_cmd_exec(t_cmd_exec *cmd, t_data *data)
 		free(cmd);
 		cmd = c_tmp;
 	}
+	data->cmd_first = NULL;
 }
