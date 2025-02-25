@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/18 14:15:48 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/25 10:17:09 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ typedef struct s_cmd_exec
 	enum e_type	type;
 	t_cmd_exec	*next;
 }t_cmd_exec;
+
+/*typedef struct s_redir
+{
+	char		*name;
+	int			fd;
+	enum e_type	type;
+	t_redir		*next;
+}	t_redir;*/
 
 void		init(t_data *data, t_env *env, char **envp);
 void		init_data(t_data *data);
