@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:47:17 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/25 17:28:21 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:21:46 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	search_type(t_cmd *cmd, t_token *token, char *str, bool first)
 		token->type = CMD;
 	if (token->next && (token->type == OUTFILE || token->type == INFILE))
 		token->next->type = CMD;
-	if (strlen(token->content) == 1 && str[0] == '<')
+	if (strlen(str) <= 2 && str[0] == '<')
 	{
 		token->type = REDIR_IN;
 		if (strlen(str) == 2 && str[1] == '<')
@@ -47,7 +47,7 @@ void	search_type(t_cmd *cmd, t_token *token, char *str, bool first)
 			return ;
 		token->next->type = INFILE;
 	}
-	else if (strlen(str) >= 2 && str[0] == '>')
+	else if (strlen(str) <= 2 && str[0] == '>')
 	{
 		token->type = REDIR_OUT;
 		if (strlen(str) == 2 && str[1] == '>')
