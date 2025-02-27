@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/27 13:04:18 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:23:01 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ void	cmd_tok(t_data *data)
 			init_cmd_exec(data, cmd);
 			cmd_exec = data->cmd_first;
 		}
-		if (is_type(cmd->token->type))
-			init_redir_exec(data, cmd);
 		//if (is_type(cmd->token->type))
+		//	init_redir_exec(data, cmd);
 		while (cmd_exec != NULL)
 		{
 			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
