@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/25 11:20:02 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/03 14:30:39 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_data
 	char		*rl;
 	const char	*prompt;
 	int			fd[2];
+	bool		first;
 }	t_data;
 
 typedef struct s_cmd_exec
@@ -61,7 +62,7 @@ size_t		len_w_quote(char *str);
 
 void		init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec);
 t_cmd_exec	*init_cmd_exec(t_data *data, t_cmd *cmd);
-t_cmd_exec	*new_cmd_exec(t_cmd *cmd);
+t_cmd_exec	*new_cmd_exec(t_cmd *cmd, t_token **token);
 
 void		main_exec(t_data *data);
 bool		pipe_pars(char *str);

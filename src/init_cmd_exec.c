@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:08:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/25 17:15:24 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:22:41 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,29 @@
 t_cmd_exec	*init_cmd_exec(t_data *data, t_cmd *cmd)
 {
 	t_cmd_exec	*cmd_exec;
-	size_t		i;
+	bool	i;
 
-	i = -1;
+	i = true;
 	cmd = data->c_first;
-	while (++i < data->nb_cmd)
+	cmd->token = cmd->t_first;
+	printf("coucou");
+	while (cmd != NULL)
 	{
-		if (i == 0)
+		printf("coucou");
+		while (cmd->token != NULL)
 		{
-			cmd_exec = new_cmd_exec(cmd);
-			data->cmd_first = cmd_exec;
-		}
-		else
-		{
-			cmd_exec->next = new_cmd_exec(cmd);
-			cmd_exec = cmd_exec->next;
+			if (i == true && (cmd->token->type == CMD || is_type(cmd->token)))
+			{
+				cmd_exec = new_cmd_exec(cmd, &cmd->token);
+				data->cmd_first = cmd_exec;
+				i = false;
+			}
+			else if (cmd->token->type == CMD || is_type(cmd->token)) 
+			{
+				cmd_exec->next = new_cmd_exec(cmd, &cmd->token);
+				cmd_exec = cmd_exec->next;
+			}
+			cmd->token = cmd->token->next;
 		}
 		cmd = cmd->next;
 	}
@@ -37,7 +45,7 @@ t_cmd_exec	*init_cmd_exec(t_data *data, t_cmd *cmd)
 	return (data->cmd_first);
 }
 
-t_cmd_exec	*new_cmd_exec(t_cmd *cmd)
+t_cmd_exec	*new_cmd_exec(t_cmd *cmd, t_token **token)
 {
 	t_cmd_exec	*new;
 	size_t		len;
@@ -45,13 +53,18 @@ t_cmd_exec	*new_cmd_exec(t_cmd *cmd)
 
 	i = 0;
 	new = malloc(sizeof(*new));
-	cmd->token = cmd->t_first;
+	cmd->token = *token;
 	len = len_w_quote(cmd->token->content);
 	new->next = NULL;
 	new->type = cmd->token->type;
 	new->cmd = malloc (sizeof(char *) * len + 1);
-	strcpy_w_quote(new->cmd, cmd->token->content, len + 1);
-	init_arg_exec(cmd, new);
+	if (cmd->token->type == CMD)
+	{
+		strcpy_w_quote(new->cmd, cmd->token->content, len + 1);
+		init_arg_exec(cmd, new);
+	}
+	else if (is_type(cmd->token))
+		strcpy_w_quote(new->cmd, cmd->next->token->content, len + 1);
 	return (new);
 }
 

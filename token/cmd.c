@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/27 13:23:01 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:21:38 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,9 @@ void	cmd_tok(t_data *data)
 			return ;
 		cmd = data->c_first;
 		cmd->token = cmd->t_first;
-
-		if (cmd->token->type == CMD)
-		{
-			init_cmd_exec(data, cmd);
-			cmd_exec = data->cmd_first;
-		}
-		//if (is_type(cmd->token->type))
-		//	init_redir_exec(data, cmd);
+		//data->nb_cmd = nb_cmd(data, cmd);
+		init_cmd_exec(data, cmd);
+		cmd_exec = data->cmd_first;
 		while (cmd_exec != NULL)
 		{
 			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
@@ -52,11 +47,36 @@ void	cmd_tok(t_data *data)
 			cmd_exec = cmd_exec->next;
 			printf("\n");
 		}
-		free_cmd(cmd, data);
+		/*free_cmd(cmd, data);
 		if (data->cmd_first != NULL)
-			free_cmd_exec(cmd_exec, data);
+			free_cmd_exec(cmd_exec, data);*/
 	}
 }
+
+/*int	nb_cmd(t_data *data, t_cmd *cmd)
+{
+	
+	return(nb_cmd);
+}*/
+
+		//init_cmd_exec(data, cmd);
+		//cmd_exec = data->cmd_first;
+		//if (is_type(cmd->token->type))
+		//	init_redir_exec(data, cmd);
+		/*while (cmd_exec != NULL)
+		{
+			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
+			i = 0;
+			while (cmd_exec->args[i])
+			{
+				printf("arg[%zu] = %s", i, cmd_exec->args[i]);
+				i++;
+			}
+			cmd = cmd->next;
+			cmd_exec = cmd_exec->next;
+			printf("\n");
+		}*/
+
 
 void	print(t_data *data, t_cmd *cmd)
 {
