@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:26:25 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/20 13:07:31 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:31:22 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,16 @@ char *pathfinder(char *cmd)
 	char	**path_tab;
 	int		i;
 
+	tmp = ft_strtrim(cmd, "./");
+	if (access(cmd, F_OK) == 0)
+	{
+		free(tmp);
+		return (cmd);
+	}
 	i = 0;
 	path = NULL;
 	tmp = NULL;
 	path_tab = ft_split(getenv("PATH"), ':');
-	printf("path_tab = %s\n", path_tab[0]);
 	while (path_tab[i])
 	{
 		tmp = ft_strjoin(path_tab[i], "/");
@@ -45,14 +50,13 @@ char *pathfinder(char *cmd)
 		if (access(path, F_OK) == 0)
 		{
 			free_tab(path_tab);
-			printf("path = %s\n", path);
 			return (path);
 		}
 		free(path);
 		i++;
 	}
 	free_tab(path_tab);
-	return ("NUL");
+	return (NULL);
 }
 
 int	exec_one(t_data *data)
@@ -64,15 +68,13 @@ int	exec_one(t_data *data)
 		pid = fork();
 		if (pid == 0)
 		{
-			printf("cmd de fou = %s\n", pathfinder(data->cmd_first->cmd));
-			exit(execve(pathfinder(data->cmd_first->cmd),data->cmd_first->args ,envmaker(data->e_first)));
+			exit(execve(pathfinder(data->cmd_first->args[0]),data->cmd_first->args ,envmaker(data->e_first)));
 		}
 		else
 		{
 			waitpid(pid, &status, 0);
 			if (WIFEXITED(status))
 				return (WEXITSTATUS(status));
-			printf("jsuis pas sense etre la\n");
 		}
 	}
 	return (EXIT_FAILURE);
@@ -80,15 +82,15 @@ int	exec_one(t_data *data)
 
 void	main_exec(t_data *data)
 {
-	//small code that prints all data->cmd_first->args
-	int i = 0;
-	while (data->cmd_first->args[i])
-	{
-		printf("args[%d] = %s\n", i, data->cmd_first->args[i]);
+	int		i;
+
+	printf("cmd_first = %s\n", data->cmd_first->args[1]);
+	i = 0;
+	while (data->cmd_first->args[0][i])
 		i++;
-	}
-	
-	if(data->cmd_first->type == CMD)
+	if (data->cmd_first->args[0][i - 1] == ' ')
+		data->cmd_first->args[0][i - 1] = '\0';
+	if (data->cmd_first->type == CMD)
 	{
 		if (exec_one(data) == EXIT_FAILURE)
 			ft_putstr_fd("MiniPaul: command not found\n", 2);

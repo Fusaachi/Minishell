@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:08:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/22 19:28:37 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:51:34 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ void	init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec)
 	printf("CONTENT = %s", cmd->token->content);
 	strcpy_w_quote(cmd_exec->args[0], cmd->token->content, len);
 	printf("args[0] = %s", cmd_exec->args[0]);
-	if (cmd->next && cmd->next->token->type == ARG)
+	//Ajout d'un fix qui a l'air de marcher.
+	//Contacter assistance asap
+	if (cmd->next && cmd->next->token && cmd->next->token->type == ARG)
 		cmd->token = cmd->token->next;
 	while (i < cmd->nb_arg && cmd->token->type == ARG)
 	{

@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/22 19:31:06 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:11:30 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	cmd_tok(t_data *data)
 			printf("\n");
 		}
 		free_cmd(cmd, data);
-		free_cmd_exec(cmd_exec, data);
+		//free_cmd_exec(cmd_exec, data);
 	}
 }
 
