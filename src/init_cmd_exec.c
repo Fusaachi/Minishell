@@ -6,46 +6,37 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:08:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/03 15:22:41 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/04 16:40:03 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_cmd_exec	*init_cmd_exec(t_data *data, t_cmd *cmd)
+t_cmd_exec	*cmds_exec(t_data *data, t_cmd *cmd)
 {
 	t_cmd_exec	*cmd_exec;
-	bool	i;
+	size_t		i;
 
-	i = true;
 	cmd = data->c_first;
-	cmd->token = cmd->t_first;
-	printf("coucou");
-	while (cmd != NULL)
+	i = -1;
+	while (++i < data->nb_cmd)
 	{
-		printf("coucou");
-		while (cmd->token != NULL)
+		if (i == 0)
 		{
-			if (i == true && (cmd->token->type == CMD || is_type(cmd->token)))
-			{
-				cmd_exec = new_cmd_exec(cmd, &cmd->token);
-				data->cmd_first = cmd_exec;
-				i = false;
-			}
-			else if (cmd->token->type == CMD || is_type(cmd->token)) 
-			{
-				cmd_exec->next = new_cmd_exec(cmd, &cmd->token);
-				cmd_exec = cmd_exec->next;
-			}
-			cmd->token = cmd->token->next;
+			cmd_exec = new_cmd_exec(cmd);
+			data->cmd_first = cmd_exec;
+		}
+		else
+		{
+			cmd_exec->next = new_cmd_exec(cmd);
+			cmd_exec = cmd_exec->next;
 		}
 		cmd = cmd->next;
 	}
-	cmd = data->c_first;
 	return (data->cmd_first);
 }
 
-t_cmd_exec	*new_cmd_exec(t_cmd *cmd, t_token **token)
+t_cmd_exec	*new_cmd_exec(t_cmd *cmd)
 {
 	t_cmd_exec	*new;
 	size_t		len;
@@ -53,28 +44,31 @@ t_cmd_exec	*new_cmd_exec(t_cmd *cmd, t_token **token)
 
 	i = 0;
 	new = malloc(sizeof(*new));
-	cmd->token = *token;
-	len = len_w_quote(cmd->token->content);
-	new->next = NULL;
-	new->type = cmd->token->type;
-	new->cmd = malloc (sizeof(char *) * len + 1);
+	init_cmd_exec(new);
+	cmd->token = cmd->t_first;
+	while (cmd->token != NULL && cmd->token->type != CMD)
+		cmd->token = cmd->token->next;
 	if (cmd->token->type == CMD)
 	{
+		len = len_w_quote(cmd->token->content);
+		new->cmd = malloc (sizeof(char *) * len + 1);
 		strcpy_w_quote(new->cmd, cmd->token->content, len + 1);
-		init_arg_exec(cmd, new);
+		init_arg_exec(cmd, &cmd->token, new);
 	}
-	else if (is_type(cmd->token))
-		strcpy_w_quote(new->cmd, cmd->next->token->content, len + 1);
+	//else if (is_type(cmd->token))
+	//	strcpy_w_quote(new->cmd, cmd->next->token->content, len + 1);
+	new->next = NULL;
 	return (new);
 }
 
-void	init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec)
+void	init_arg_exec(t_cmd *cmd, t_token **token, t_cmd_exec *cmd_exec)
 {
 	size_t	i;
 	size_t	len;
 
 	i = 1;
 	cmd_exec->args = malloc(sizeof(char *) * (cmd->nb_arg + 2));
+	cmd->token = *token;
 	len = len_w_quote(cmd->token->content);
 	cmd_exec->args[0] = malloc(sizeof(char) * (len + 1));
 	strcpy_w_quote(cmd_exec->args[0], cmd->token->content, len);
@@ -89,4 +83,13 @@ void	init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec)
 		i++;
 	}
 	cmd_exec->args[i] = NULL;
+}
+
+void	init_cmd_exec(t_cmd_exec *cmd_exec)
+{
+	cmd_exec->args = NULL;
+	cmd_exec->next = NULL;
+	cmd_exec->type = CMD;
+	cmd_exec->cmd = NULL;
+	cmd_exec->redir = NULL;
 }

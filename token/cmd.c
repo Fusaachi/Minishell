@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/03 15:21:38 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/04 16:49:28 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	cmd_tok(t_data *data)
 			return ;
 		cmd = data->c_first;
 		cmd->token = cmd->t_first;
-		//data->nb_cmd = nb_cmd(data, cmd);
-		init_cmd_exec(data, cmd);
+		cmds_exec(data, cmd);
 		cmd_exec = data->cmd_first;
 		while (cmd_exec != NULL)
 		{
@@ -40,16 +39,16 @@ void	cmd_tok(t_data *data)
 			i = 0;
 			while (cmd_exec->args[i])
 			{
-				printf("arg[%zu] = %s", i, cmd_exec->args[i]);
+				printf("arg[%zu] = %s, ", i, cmd_exec->args[i]);
 				i++;
 			}
 			cmd = cmd->next;
 			cmd_exec = cmd_exec->next;
 			printf("\n");
 		}
-		/*free_cmd(cmd, data);
+		free_cmd(cmd, data);
 		if (data->cmd_first != NULL)
-			free_cmd_exec(cmd_exec, data);*/
+			free_cmd_exec(cmd_exec, data);
 	}
 }
 
