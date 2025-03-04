@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:30:57 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/27 09:40:24 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/03/04 17:33:25 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdlib.h>
 
 typedef struct s_env	t_env;
+typedef struct s_data	t_data;
+typedef struct s_cmd_exec	t_cmd_exec;
 
 //utils
 
@@ -90,4 +92,27 @@ int					bt_env(t_env *env);
  */
 t_env				*bt_unset(char *name, t_env *env);
 
+//exit
+
+/**
+ * Exits the shell
+ * TODO : Free stuff
+ * 
+ * @param data The data that will be freed
+ * @param args i don't know if it will be needed, delete if unnecessary
+ * 
+ * @return 1
+ */
+int					bt_exit(t_data *data, char **args);
+
+//exec
+
+/**
+ * Executes a builtin command.
+ *
+ * @param data The data structure.
+ * @param cmd The command to execute.
+ * @return 1 if the command is a builtin, 0 otherwise.
+ */
+int			exec_builtin(t_data *data, t_cmd_exec *cmd);
 #endif // BUILTIN_H

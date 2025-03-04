@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bt_export.c                                        :+:      :+:    :+:   */
+/*   bt_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 16:20:37 by pfranke           #+#    #+#             */
-/*   Updated: 2025/03/04 18:15:56 by pfranke          ###   ########.fr       */
+/*   Created: 2025/03/04 17:16:33 by pfranke           #+#    #+#             */
+/*   Updated: 2025/03/04 17:16:55 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_env	*bt_export(t_env *env, char *content)
+int	bt_exit(t_data *data, char **args)
 {
-	t_env	*tmp;
-
-	if (!content || !ft_strchr(content, '='))
-		return (env);
-	if (!env)
-	{
-		env = lstnew(content);
-		if (!env)
-			return (NULL);
-		env->key = env_key(env->content);
-		env->value = env_value(env->content);
-		return (env);
-	}
-	tmp = lstlast(env);
-	tmp->next = lstnew(content);
-	tmp->next->key = env_key(content);
-	tmp->next->value = env_value(content);
-	return (env);
+	(void)data;
+	(void)args;
+	exit(0);
 }

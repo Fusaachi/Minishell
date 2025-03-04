@@ -6,7 +6,7 @@
 #    By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 15:16:56 by pgiroux           #+#    #+#              #
-#    Updated: 2025/02/18 21:38:03 by pfranke          ###   ########.fr        #
+#    Updated: 2025/03/04 17:17:48 by pfranke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ FILE = main quote init exec init_cmd_exec
 SIGNAL = signals
 ENV = env
 UTIL = free is skip_whitespace epur
-BUILTIN = bt_cd bt_echo bt_env bt_export bt_pwd bt_unset bt_utils
-PIPE = pipe_utils pipe
+BUILTIN = bt_cd bt_echo bt_env bt_export bt_pwd bt_unset bt_utils bt_exit bt_exec
+PIPE = pipe_utils execute execute_utils
 TOK = cmd new split_cmd split_token type
 
 GREEN = \033[1;32m

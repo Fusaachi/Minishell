@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/22 19:30:05 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/03/04 18:00:03 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "utils/utils.h"
 # include "token/token.h"
 
+
 typedef struct s_data
 {
 	t_env		*e_first;
@@ -35,7 +36,15 @@ typedef struct s_data
 	char		*rl;
 	const char	*prompt;
 	int			fd[2];
+	bool		first;
 }	t_data;
+
+typedef struct s_redir
+{
+	char			*name;
+	enum e_type		type;
+	struct s_redir	*next;
+}t_redir;
 
 typedef struct s_cmd_exec
 {
@@ -43,6 +52,7 @@ typedef struct s_cmd_exec
 	char		**args;
 	enum e_type	type;
 	t_cmd_exec	*next;
+	t_redir		*redir;
 }t_cmd_exec;
 
 void		init(t_data *data, t_env *env, char **envp);
@@ -53,8 +63,9 @@ bool		check_quote(char *str, size_t *i);
 size_t		strcpy_w_quote(char *dest, const char *src, size_t size);
 size_t		len_w_quote(char *str);
 
-void		init_arg_exec(t_cmd *cmd, t_cmd_exec *cmd_exec);
-t_cmd_exec	*init_cmd_exec(t_data *data, t_cmd *cmd);
+void		init_arg_exec(t_cmd *cmd, t_token **token, t_cmd_exec *cmd_exec);
+void		init_cmd_exec(t_cmd_exec *cmd_exec);
+t_cmd_exec	*cmds_exec(t_data *data, t_cmd *cmd);
 t_cmd_exec	*new_cmd_exec(t_cmd *cmd);
 
 void		main_exec(t_data *data);

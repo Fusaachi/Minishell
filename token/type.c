@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:47:17 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/22 19:31:30 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/03/04 18:11:16 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	type_token(t_cmd *cmd, t_data *data)
 		{
 			if (cmd->token->type != INFILE && cmd->token->type != OUTFILE)
 				search_type(cmd, cmd->token, cmd->token->content, first);
-			printf("TOKEN %s = %u\n", cmd->token->content, cmd->token->type);
 			first = false;
 			cmd->token = cmd->token->next;
 		}

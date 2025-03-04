@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bt_export.c                                        :+:      :+:    :+:   */
+/*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 16:20:37 by pfranke           #+#    #+#             */
-/*   Updated: 2025/03/04 18:15:56 by pfranke          ###   ########.fr       */
+/*   Created: 2025/03/04 13:55:59 by pfranke           #+#    #+#             */
+/*   Updated: 2025/03/04 14:14:16 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_env	*bt_export(t_env *env, char *content)
+int	is_builtin(char *cmd)
 {
-	t_env	*tmp;
-
-	if (!content || !ft_strchr(content, '='))
-		return (env);
-	if (!env)
-	{
-		env = lstnew(content);
-		if (!env)
-			return (NULL);
-		env->key = env_key(env->content);
-		env->value = env_value(env->content);
-		return (env);
-	}
-	tmp = lstlast(env);
-	tmp->next = lstnew(content);
-	tmp->next->key = env_key(content);
-	tmp->next->value = env_value(content);
-	return (env);
+	if (!ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "cd")
+		|| !ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd, "export")
+		|| !ft_strcmp(cmd, "unset") || !ft_strcmp(cmd, "env")
+		|| !ft_strcmp(cmd, "exit"))
+		return (1);
+	return (0);
 }

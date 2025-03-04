@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/22 20:11:30 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/03/04 18:11:05 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	cmd_tok(t_data *data)
 {
 	t_cmd		*cmd;
 	t_cmd_exec	*cmd_exec;
-	//size_t		i;
+	size_t		i;
 
-	//i = 0;
+	i = 0;
 	cmd = NULL;
 	cmd_exec = NULL;
 	if (pipe_pars(data->rl))
@@ -30,25 +30,47 @@ void	cmd_tok(t_data *data)
 		if (same_type(cmd, data))
 			return ;
 		cmd = data->c_first;
-		init_cmd_exec(data, cmd);
+		cmd->token = cmd->t_first;
+		cmds_exec(data, cmd);
 		cmd_exec = data->cmd_first;
 		while (cmd_exec != NULL)
 		{
-			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
-			/*i = 0;
-			while (i <= cmd->nb_arg)
+			i = 0;
+			while (cmd_exec->args[i])
 			{
-				printf("arg[%zu] = %s, type = %s\n", i, cmd_exec->args[i]);
 				i++;
-			}*/
+			}
+			cmd = cmd->next;
+			cmd_exec = cmd_exec->next;
+		}
+		free_cmd(cmd, data);
+	}
+}
+
+/*int	nb_cmd(t_data *data, t_cmd *cmd)
+{
+	
+	return(nb_cmd);
+}*/
+
+		//init_cmd_exec(data, cmd);
+		//cmd_exec = data->cmd_first;
+		//if (is_type(cmd->token->type))
+		//	init_redir_exec(data, cmd);
+		/*while (cmd_exec != NULL)
+		{
+			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
+			i = 0;
+			while (cmd_exec->args[i])
+			{
+				printf("arg[%zu] = %s", i, cmd_exec->args[i]);
+				i++;
+			}
 			cmd = cmd->next;
 			cmd_exec = cmd_exec->next;
 			printf("\n");
-		}
-		free_cmd(cmd, data);
-		//free_cmd_exec(cmd_exec, data);
-	}
-}
+		}*/
+
 
 void	print(t_data *data, t_cmd *cmd)
 {

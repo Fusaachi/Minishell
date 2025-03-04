@@ -6,33 +6,29 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:01:07 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/27 09:38:43 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/03/04 18:19:04 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	triple_free(t_env *env)
-{
-	free(env->content);
-	free(env->key);
-	free(env->value);
-	free(env);
-}
+#include <stdlib.h> // Pour free
 
-t_env	*one_element(char *name, t_env *env)
-{
-	t_env	*tmp;
+// Hypothèse : ft_strncmp et ft_strlen sont des fonctions de ta libft
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlen(const char *s);
 
-	tmp = env;
-	if (ft_strncmp(tmp->key, name, ft_strlen(name)) == 0)
+// Fonction pour libérer un nœud t_env
+static void	triple_free(t_env *node)
+{
+	if (node)
 	{
-		env = env->next;
-		triple_free(tmp);
-		env = NULL;
-		return (NULL);
+		if (node->key)
+			free(node->key);
+		if (node->content)
+			free(node->content);
+		free(node);
 	}
-	return (env);
 }
 
 t_env	*bt_unset(char *name, t_env *env)
@@ -40,30 +36,27 @@ t_env	*bt_unset(char *name, t_env *env)
 	t_env	*tmp;
 	t_env	*prev;
 
+	if (!env || !name) // Vérification des arguments
+		return (env);
 	tmp = env;
-	prev = env;
-	printf("name = %p\n", env->next);
-	if (!env->next)
-	{
-		return (one_element(name, env));
-	}
+	prev = NULL; // Initialisé à NULL car on n’a pas encore de précédent
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->key, name, ft_strlen(name)) == 0)
+		if (ft_strncmp(tmp->key, name, ft_strlen(name)) == 0
+			&& ft_strlen(tmp->key) == ft_strlen(name)) // Comparaison exacte
 		{
-			if (tmp == env)
+			if (tmp == env) // Cas où c’est le premier élément
 			{
 				env = env->next;
-				free(tmp->content);
-				free(tmp);
+				triple_free(tmp);
 				return (env);
 			}
-			prev->next = tmp->next;
+			prev->next = tmp->next; // Relie le précédent au suivant
 			triple_free(tmp);
 			return (env);
 		}
 		prev = tmp;
 		tmp = tmp->next;
 	}
-	return (env);
+	return (env); // Si rien n’est trouvé, retourne la liste inchangée
 }

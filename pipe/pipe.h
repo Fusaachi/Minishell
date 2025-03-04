@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:10:07 by pfranke           #+#    #+#             */
-/*   Updated: 2025/01/28 13:17:06 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/03/04 14:24:32 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../minishell.h"
 # include <sys/types.h>
 # include <sys/wait.h>
+
+typedef struct s_cmd_exec	t_cmd_exec;
 /**
  * @brief Tranforms a list of environment variables into a double array.
  * 
@@ -61,6 +63,9 @@ char	*ft_getpath(t_env *e_first, char *name);
  * 
  * @return Returns 0 on success, or 1 on fork failure.
  */
-int		pipe_execone(char *command, char **args, t_env *e_first);
 
+int			exec_one(t_data *data, t_cmd_exec *cmd);
+void		ft_free_tab(char **tab);
+
+int			is_builtin(char *cmd);
 #endif
