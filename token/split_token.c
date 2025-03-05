@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:04:49 by fusaaki           #+#    #+#             */
-/*   Updated: 2025/03/04 16:49:16 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/05 12:59:51 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,23 @@ void	split_token(t_cmd *cmd, char *str)
 
 	t.i = 0;
 	t.start = 0;
-	t.first = true;
+	t.f = true;
 	while (str[t.i])
 	{
 		in_the_quote(str, &t);
 		if (is_redir(str[t.i]))
 		{
-			split_token_redir(cmd, &str[t.start], t.i - t.start, t.first);
+			split_token_redir(cmd, &str[t.start], t.i - t.start, t.f);
 			for_the_redir(str, &t);
 		}
 		else if (!str[t.i] || is_space(str[t.i]) || str[t.i + 1] == '\0')
 		{
 			if (is_space(str[t.i]))
-				split_token_space(cmd, &str[t.start], t.i - t.start + 1, t.first);
+				split_token_space(cmd, &str[t.start], t.i - t.start + 1, t.f);
 			else
-				split_token_space(cmd, &str[t.start], t.i - t.start + 2, t.first);
+				split_token_space(cmd, &str[t.start], t.i - t.start + 2, t.f);
 			t.start = t.i + 1;
-			t.first = false;
+			t.f = false;
 		}
 		if (str[t.i])
 			t.i++;
@@ -96,5 +96,5 @@ void	for_the_redir(char *str, t_t *t)
 		t->i++;
 		t->start++;
 	}
-	t->first = false;
+	t->f = false;
 }

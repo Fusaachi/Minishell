@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:14:16 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/03 09:56:20 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/05 16:06:59 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_data(t_data *data)
 	data->c_first = NULL;
 	data->e_first = NULL;
 	data->cmd_first = NULL;
+	data->redir_first = NULL;
 	data->rl = NULL;
 	data->prompt = "MiniPaul>";
 }

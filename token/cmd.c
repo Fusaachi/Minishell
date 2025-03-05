@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/04 16:49:28 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/05 16:13:27 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,16 @@ void	cmd_tok(t_data *data)
 		{
 			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
 			i = 0;
+			cmd_exec->redir = data->redir_first;
 			while (cmd_exec->args[i])
 			{
 				printf("arg[%zu] = %s, ", i, cmd_exec->args[i]);
 				i++;
+			}
+			while (cmd_exec->redir != NULL)
+			{
+				printf("redir = %s", cmd_exec->redir->name);
+				cmd_exec->redir = cmd_exec->redir->next;
 			}
 			cmd = cmd->next;
 			cmd_exec = cmd_exec->next;
@@ -51,31 +57,6 @@ void	cmd_tok(t_data *data)
 			free_cmd_exec(cmd_exec, data);
 	}
 }
-
-/*int	nb_cmd(t_data *data, t_cmd *cmd)
-{
-	
-	return(nb_cmd);
-}*/
-
-		//init_cmd_exec(data, cmd);
-		//cmd_exec = data->cmd_first;
-		//if (is_type(cmd->token->type))
-		//	init_redir_exec(data, cmd);
-		/*while (cmd_exec != NULL)
-		{
-			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
-			i = 0;
-			while (cmd_exec->args[i])
-			{
-				printf("arg[%zu] = %s", i, cmd_exec->args[i]);
-				i++;
-			}
-			cmd = cmd->next;
-			cmd_exec = cmd_exec->next;
-			printf("\n");
-		}*/
-
 
 void	print(t_data *data, t_cmd *cmd)
 {

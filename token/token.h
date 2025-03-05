@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/21 12:26:35 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/05 12:59:07 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_c
 
 typedef struct s_t
 {
-	bool	first;
+	bool	f;
 	size_t	i;
 	size_t	start;
 }	t_t;
@@ -41,6 +41,7 @@ struct s_cmd
 	size_t		nb_arg;
 	t_token		*token;
 	t_token		*t_first;
+	bool		cmd_e;
 	t_cmd		*next;
 };
 
