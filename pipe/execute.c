@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:31:56 by pfranke           #+#    #+#             */
-/*   Updated: 2025/03/04 18:31:18 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/03/05 14:06:56 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,9 @@ int	exec_one(t_data *data, t_cmd_exec *cmd)
 		pid = fork();
 		if (pid == 0)
 		{
-			if (execve(pathfinder(cmd->args[0]), &cmd->args[1],
+			if (execve(pathfinder(cmd->args[0]), &cmd->args[0],
 					envmaker(data->e_first)) == -1)
-			{
-				printf("that was arg[1] = %s\n", cmd->args[1]);
 				exit(EXIT_FAILURE);
-			}
 		}
 		else
 		{
