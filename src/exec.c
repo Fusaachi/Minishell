@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:26:25 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/05 14:06:27 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/03/06 16:16:32 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,8 @@ void	free_tab(char **tab)
 
 void	main_exec(t_data *data)
 {
-	//split the problem into smaller problems
 	t_cmd_exec	*current_cmd;
-	int i = 0;
-	//trim all of the args char *
-	while(data->cmd_first->args[i])
-	{
-		data->cmd_first->args[i] = ft_strtrim(data->cmd_first->args[i], " ");
-		i++;
-	}
+
 	current_cmd = data->cmd_first;
 	while (current_cmd)
 	{

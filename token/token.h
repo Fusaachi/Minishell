@@ -6,7 +6,7 @@
 /*   By: pfranke <pfranke@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/22 19:30:38 by pfranke          ###   ########.fr       */
+/*   Updated: 2025/03/06 16:15:51 by pfranke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_c
 
 typedef struct s_t
 {
-	bool	first;
+	bool	f;
 	size_t	i;
 	size_t	start;
 }	t_t;
@@ -41,8 +41,10 @@ struct s_cmd
 	size_t		nb_arg;
 	t_token		*token;
 	t_token		*t_first;
+	bool		cmd_e;
 	t_cmd		*next;
 };
+
 
 enum	e_type
 {
