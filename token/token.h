@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/05 12:59:07 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/07 15:47:36 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ void	type_token(t_cmd *cmd, t_data *data);
 void	search_type(t_cmd *cmd, t_token *token, char *str, bool first);
 bool	is_type(t_token *token);
 bool	same_type(t_cmd *cmd, t_data *data);
+void	free_error(t_cmd *cmd, t_data *data);
 
 #endif

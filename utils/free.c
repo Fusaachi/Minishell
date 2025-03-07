@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:09:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/07 18:06:35 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/07 16:36:05 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,37 @@ void	free_cmd_exec(t_cmd_exec *cmd, t_data *data)
 	cmd = data->cmd_first;
 	while (cmd != NULL)
 	{
-		i = 0;
-		while (cmd->args[i])
+		cmd->redir = cmd->redir_first;
+		if (cmd != NULL && cmd->type == CMD)
 		{
-			free(cmd->args[i]);
-			i++;
+			i = 0;
+			while (cmd->args[i])
+			{
+				free(cmd->args[i]);
+				i++;
+			}
+			free(cmd->args);
+			free(cmd->cmd);
 		}
-		free(cmd->args);
+		if (cmd != NULL && cmd->redir != NULL)
+			free_redir(cmd);
 		c_tmp = cmd->next;
-		free(cmd->cmd);
 		free(cmd);
 		cmd = c_tmp;
 	}
 	data->cmd_first = NULL;
+}
+
+void	free_redir(t_cmd_exec *cmd)
+{
+	t_redir		*redir_tmp;
+
+	cmd->redir = cmd->redir_first;
+	while (cmd->redir != NULL)
+	{
+		redir_tmp = cmd->redir->next;
+		free(cmd->redir->name);
+		free(cmd->redir);
+		cmd->redir = redir_tmp;
+	}
 }

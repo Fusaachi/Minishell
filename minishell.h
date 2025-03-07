@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/07 18:06:57 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:27:46 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_data
 	t_env		*e_first;
 	t_cmd		*c_first;
 	t_cmd_exec	*cmd_first;
-	t_redir		*redir_first;
 	size_t		nb_cmd;
 	char		*rl;
 	const char	*prompt;
@@ -47,6 +46,7 @@ typedef struct s_cmd_exec
 {
 	char		*cmd;
 	char		**args;
+	bool		first;
 	t_redir		*redir_first;
 	enum e_type	type;
 	t_cmd_exec	*next;
@@ -63,10 +63,11 @@ size_t		len_w_quote(char *str);
 
 void		init_arg_exec(t_cmd *cmd, t_token **token, t_cmd_exec *cmd_exec);
 void		init_cmd_exec(t_cmd_exec *cmd_exec);
-t_redir		*init_redir(t_cmd *cmd, t_token **token, t_data *data);
+t_redir		*init_redir(t_cmd *cmd, t_token **token, t_cmd_exec *cmd_exec);
 t_redir		*new_redir(t_cmd *cmd, t_token **token);
 t_cmd_exec	*cmds_exec(t_data *data, t_cmd *cmd);
 t_cmd_exec	*new_cmd_exec(t_cmd *cmd);
+void		cmd_arg(t_cmd *cmd, t_cmd_exec *new);
 
 void		main_exec(t_data *data);
 bool		pipe_pars(char *str);

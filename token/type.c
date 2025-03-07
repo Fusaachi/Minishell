@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:47:17 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/05 12:39:36 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/07 16:38:26 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ bool	same_type(t_cmd *cmd, t_data *data)
 		cmd->token = cmd->t_first;
 		while (cmd->token != NULL)
 		{
-			printf("PRINT TYPE = %u\n", cmd->token->type);
 			if (is_type(cmd->token) && cmd->token->next != NULL
 				&& is_type(cmd->token->next))
 			{
@@ -98,4 +97,27 @@ bool	same_type(t_cmd *cmd, t_data *data)
 		cmd = cmd->next;
 	}
 	return (false);
+}
+
+void	free_error(t_cmd *cmd, t_data *data)
+{
+	t_token	*temp_token;
+	t_cmd	*cmd_temp;
+
+	cmd = data->c_first;
+	while (cmd != NULL)
+	{
+		cmd->token = cmd->t_first;
+		while (cmd->token != NULL)
+		{
+			temp_token = cmd->token->next;
+			free(cmd->token->content);
+			free(cmd->token);
+			cmd->token = temp_token;
+		}
+		cmd_temp = cmd->next;
+		free(cmd->content);
+		free(cmd);
+		cmd = cmd_temp;
+	}
 }

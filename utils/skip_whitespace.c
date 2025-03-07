@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:45:25 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 13:07:42 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/07 14:50:56 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	skip_end(char *str)
 	i = 0;
 	while (str[i])
 		i++;
-	i--;
 	while (is_space(str[i]))
 		i--;
 	return (i);

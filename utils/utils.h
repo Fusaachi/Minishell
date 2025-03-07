@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 14:10:02 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/02/21 14:12:10 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/06 16:59:26 by fusaaki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_env	*free_env(t_data *data, t_env *env);
 void	all_free(t_data *data, t_env *env, char **envp);
 void	free_cmd(t_cmd *cmd, t_data *data);
 void	free_cmd_exec(t_cmd_exec *cmd_exec, t_data *data);
+void	free_redir(t_cmd_exec *cmd);
 
 bool	is_char(char c);
 bool	is_space(char c);

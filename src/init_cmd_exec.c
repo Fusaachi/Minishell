@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:08:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/07 18:07:06 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:34:23 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_cmd_exec	*cmds_exec(t_data *data, t_cmd *cmd)
 	{
 		if (i == 0)
 		{
-			cmd_exec = new_cmd_exec(cmd, data);
+			cmd_exec = new_cmd_exec(cmd);
 			data->cmd_first = cmd_exec;
 		}
 		else
 		{
-			cmd_exec->next = new_cmd_exec(cmd, data);
+			cmd_exec->next = new_cmd_exec(cmd);
 			cmd_exec = cmd_exec->next;
 		}
 		cmd = cmd->next;
@@ -36,10 +36,9 @@ t_cmd_exec	*cmds_exec(t_data *data, t_cmd *cmd)
 	return (data->cmd_first);
 }
 
-t_cmd_exec	*new_cmd_exec(t_cmd *cmd, t_data *data)
+t_cmd_exec	*new_cmd_exec(t_cmd *cmd)
 {
 	t_cmd_exec	*new;
-	size_t		len;
 
 	new = malloc(sizeof(*new));
 	init_cmd_exec(new);
@@ -47,13 +46,13 @@ t_cmd_exec	*new_cmd_exec(t_cmd *cmd, t_data *data)
 	while (cmd->token != NULL)
 	{
 		if (cmd->token != NULL && cmd->token->type == CMD)
-		{
-			new->type = CMD;
-			len = len_w_quote(cmd->token->content);
-			new->cmd = malloc (sizeof(char *) * len + 1);
-			strcpy_w_quote(new->cmd, cmd->token->content, len + 1);
-			init_arg_exec(cmd, &cmd->token, new);
-		}
+			cmd_arg(cmd, new);
+		if (cmd->token != NULL)
+			cmd->token = cmd->token->next;
+	}
+	cmd->token = cmd->t_first;
+	while (cmd->token != NULL)
+	{
 		if (cmd->token != NULL && is_type(cmd->token) && !new->redir)
 			init_redir(cmd, &cmd->token, new);
 		if (cmd->token != NULL)
@@ -90,16 +89,6 @@ void	init_arg_exec(t_cmd *cmd, t_token **token, t_cmd_exec *cmd_exec)
 	cmd_exec->args[i] = NULL;
 }
 
-void	init_cmd_exec(t_cmd_exec *cmd_exec)
-{
-	cmd_exec->args = NULL;
-	cmd_exec->next = NULL;
-	cmd_exec->type = ARG;
-	cmd_exec->cmd = NULL;
-	cmd_exec->redir = NULL;
-	cmd_exec->redir_first = NULL;
-}
-
 t_redir	*init_redir(t_cmd *cmd, t_token **token, t_cmd_exec *cmd_exec)
 {
 	t_redir	*redir;
@@ -107,14 +96,12 @@ t_redir	*init_redir(t_cmd *cmd, t_token **token, t_cmd_exec *cmd_exec)
 
 	first = true;
 	cmd->token = *token;
-
 	while (cmd->token != NULL)
 	{
 		if (is_type(cmd->token) && first == true)
 		{
-			printf("REDIR = %u", cmd->token->type);
 			redir = new_redir(cmd, &cmd->token);
-			data->redir_first = redir;
+			cmd_exec->redir_first = redir;
 			first = false;
 		}
 		else if (is_type(cmd->token) && first == false)
@@ -122,12 +109,9 @@ t_redir	*init_redir(t_cmd *cmd, t_token **token, t_cmd_exec *cmd_exec)
 			redir->next = new_redir(cmd, &cmd->token);
 			redir = redir->next;
 		}
-		if (cmd->token->next != NULL && is_type(cmd->token->next))
-			cmd->token = cmd->token->next;
-		else
-			break;
+		cmd->token = cmd->token->next;
 	}
-	return (data->redir_first);
+	return (cmd_exec->redir_first);
 }
 
 t_redir	*new_redir(t_cmd *cmd, t_token **token)
@@ -144,4 +128,15 @@ t_redir	*new_redir(t_cmd *cmd, t_token **token)
 	strcpy_w_quote(new->name, cmd->token->content, len + 1);
 	new->next = NULL;
 	return (new);
+}
+
+void	cmd_arg(t_cmd *cmd, t_cmd_exec *new)
+{
+	size_t	len;
+
+	new->type = CMD;
+	len = len_w_quote(cmd->token->content);
+	new->cmd = malloc (sizeof(char *) * len + 1);
+	strcpy_w_quote(new->cmd, cmd->token->content, len + 1);
+	init_arg_exec(cmd, &cmd->token, new);
 }

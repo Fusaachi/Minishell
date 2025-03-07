@@ -6,11 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:10:10 by pgiroux           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/02/20 15:34:09 by pgiroux          ###   ########.fr       */
-=======
-/*   Updated: 2025/03/07 14:51:19 by pgiroux          ###   ########.fr       */
->>>>>>> parent of e70f11d (good)
+/*   Updated: 2025/03/07 15:48:27 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +33,10 @@ char	*epur_strcpy(char *src, char *dest, int lens, int i)
 	i = skip_space(src);
 	j = -1;
 	len = skip_end(src);
-	printf( "LEN = %i", lens);
 	dest = malloc(sizeof(char *) * lens + 1);
 	while (i <= len)
 	{
-		if (is_space(src[i]) || is_char(src[i]))
+		if (is_space(src[i]) || is_char(src[i]) || is_redir(src[i]))
 			dest[++j] = src[i];
 		if (is_quote(src[i]))
 		{
@@ -54,7 +49,6 @@ char	*epur_strcpy(char *src, char *dest, int lens, int i)
 			i++;
 		i++;
 	}
-	printf(" J = %i", j);
 	dest[++j] = '\0';
 	return (dest);
 }
@@ -82,7 +76,7 @@ int	epur_len(char *str)
 			while (is_space(str[i++]))
 				continue ;
 		}
-		if (!is_space(str[i]) && switcher < 0)
+		if (i <= len && !is_space(str[i]) && switcher < 0)
 			j++;
 	}
 	return (j);

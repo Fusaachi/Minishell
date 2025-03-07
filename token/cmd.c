@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fusaaki <fusaaki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:33:57 by pgiroux           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/03/05 16:13:27 by pgiroux          ###   ########.fr       */
-=======
-/*   Updated: 2025/03/06 17:09:42 by fusaaki          ###   ########.fr       */
->>>>>>> parent of e70f11d (good)
+/*   Updated: 2025/03/07 16:40:57 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +28,10 @@ void	cmd_tok(t_data *data)
 		cmd->token = cmd->t_first;
 		type_token(cmd, data);
 		if (same_type(cmd, data))
+		{
+			free_error(cmd, data);
 			return ;
+		}
 		cmd = data->c_first;
 		cmd->token = cmd->t_first;
 		cmds_exec(data, cmd);
@@ -41,19 +40,22 @@ void	cmd_tok(t_data *data)
 		{
 			printf("cmd = %s\ntype = %u\n", cmd_exec->cmd, cmd_exec->type);
 			i = 0;
-			cmd_exec->redir = data->redir_first;
-			while (cmd_exec->args[i])
+			cmd_exec->redir = cmd_exec->redir_first;
+			if (cmd_exec->args != NULL)
 			{
-				printf("arg[%zu] = %s, ", i, cmd_exec->args[i]);
-				i++;
+				while (cmd_exec->args[i])
+				{
+					printf("arg[%zu] = %s, ", i, cmd_exec->args[i]);
+					i++;
+				}
 			}
 			while (cmd_exec->redir != NULL)
 			{
 				printf("redir = %s", cmd_exec->redir->name);
 				cmd_exec->redir = cmd_exec->redir->next;
 			}
-			cmd = cmd->next;
-			cmd_exec = cmd_exec->next;
+			if (cmd_exec != NULL)
+				cmd_exec = cmd_exec->next;
 			printf("\n");
 		}
 		free_cmd(cmd, data);
