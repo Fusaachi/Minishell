@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:08:59 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/05 16:35:42 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/07 18:07:06 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,16 @@ t_cmd_exec	*new_cmd_exec(t_cmd *cmd, t_data *data)
 	cmd->token = cmd->t_first;
 	while (cmd->token != NULL)
 	{
-		if (cmd->token->type == CMD)
+		if (cmd->token != NULL && cmd->token->type == CMD)
 		{
+			new->type = CMD;
 			len = len_w_quote(cmd->token->content);
 			new->cmd = malloc (sizeof(char *) * len + 1);
 			strcpy_w_quote(new->cmd, cmd->token->content, len + 1);
 			init_arg_exec(cmd, &cmd->token, new);
 		}
-		if (is_type(cmd->token) && !new->redir)
-			init_redir(cmd, &cmd->token, data);
+		if (cmd->token != NULL && is_type(cmd->token) && !new->redir)
+			init_redir(cmd, &cmd->token, new);
 		if (cmd->token != NULL)
 			cmd->token = cmd->token->next;
 	}
@@ -93,12 +94,13 @@ void	init_cmd_exec(t_cmd_exec *cmd_exec)
 {
 	cmd_exec->args = NULL;
 	cmd_exec->next = NULL;
-	cmd_exec->type = CMD;
+	cmd_exec->type = ARG;
 	cmd_exec->cmd = NULL;
 	cmd_exec->redir = NULL;
+	cmd_exec->redir_first = NULL;
 }
 
-t_redir	*init_redir(t_cmd *cmd, t_token **token, t_data *data)
+t_redir	*init_redir(t_cmd *cmd, t_token **token, t_cmd_exec *cmd_exec)
 {
 	t_redir	*redir;
 	bool	first;
@@ -120,7 +122,10 @@ t_redir	*init_redir(t_cmd *cmd, t_token **token, t_data *data)
 			redir->next = new_redir(cmd, &cmd->token);
 			redir = redir->next;
 		}
-		cmd->token = cmd->token->next;
+		if (cmd->token->next != NULL && is_type(cmd->token->next))
+			cmd->token = cmd->token->next;
+		else
+			break;
 	}
 	return (data->redir_first);
 }

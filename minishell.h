@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:32:53 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/05 16:15:57 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/07 18:06:57 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_cmd_exec
 {
 	char		*cmd;
 	char		**args;
+	t_redir		*redir_first;
 	enum e_type	type;
 	t_cmd_exec	*next;
 	t_redir		*redir;
@@ -65,7 +66,7 @@ void		init_cmd_exec(t_cmd_exec *cmd_exec);
 t_redir		*init_redir(t_cmd *cmd, t_token **token, t_data *data);
 t_redir		*new_redir(t_cmd *cmd, t_token **token);
 t_cmd_exec	*cmds_exec(t_data *data, t_cmd *cmd);
-t_cmd_exec	*new_cmd_exec(t_cmd *cmd, t_data *data);
+t_cmd_exec	*new_cmd_exec(t_cmd *cmd);
 
 void		main_exec(t_data *data);
 bool		pipe_pars(char *str);

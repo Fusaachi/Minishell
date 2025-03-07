@@ -6,7 +6,11 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:10:10 by pgiroux           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/02/20 15:34:09 by pgiroux          ###   ########.fr       */
+=======
+/*   Updated: 2025/03/07 14:51:19 by pgiroux          ###   ########.fr       */
+>>>>>>> parent of e70f11d (good)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +37,7 @@ char	*epur_strcpy(char *src, char *dest, int lens, int i)
 	i = skip_space(src);
 	j = -1;
 	len = skip_end(src);
+	printf( "LEN = %i", lens);
 	dest = malloc(sizeof(char *) * lens + 1);
 	while (i <= len)
 	{
@@ -49,6 +54,7 @@ char	*epur_strcpy(char *src, char *dest, int lens, int i)
 			i++;
 		i++;
 	}
+	printf(" J = %i", j);
 	dest[++j] = '\0';
 	return (dest);
 }
