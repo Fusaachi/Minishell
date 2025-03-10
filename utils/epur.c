@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:10:10 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/07 15:48:27 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/10 13:51:31 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ char	*epur_strcpy(char *src, char *dest, int lens, int i)
 	int		len;
 	char	quote;
 
-	i = skip_space(src);
+	i = skip_space(src)- 1;
 	j = -1;
 	len = skip_end(src);
 	dest = malloc(sizeof(char *) * lens + 1);
-	while (i <= len)
+	if (!dest)
+		exit(EXIT_FAILURE);
+	while (++i <= len)
 	{
 		if (is_space(src[i]) || is_char(src[i]) || is_redir(src[i]))
 			dest[++j] = src[i];
@@ -47,10 +49,8 @@ char	*epur_strcpy(char *src, char *dest, int lens, int i)
 		}
 		while (is_space(src[i]) && is_space(src[i + 1]))
 			i++;
-		i++;
 	}
-	dest[++j] = '\0';
-	return (dest);
+	return (dest[++j] = '\0', dest);
 }
 
 int	epur_len(char *str)

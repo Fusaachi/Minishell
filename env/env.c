@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:36:13 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/01/30 13:15:25 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/10 12:47:53 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ t_env	*lstnew(char *content)
 	t_env	*new;
 
 	new = malloc(sizeof(*new));
+	if (!new)
+		exit(EXIT_FAILURE);
 	new->content = ft_strdup(content);
-	if (!new->content && !new)
+	if (!new->content)
 	{
 		free(new);
 		exit(EXIT_FAILURE);
@@ -59,7 +61,7 @@ char	*env_key(char *str)
 		len++;
 	key = malloc(sizeof(char *) * len + 1);
 	if (!key)
-		perror(NULL);
+		exit(EXIT_FAILURE);
 	while (i < len)
 	{
 		key[i] = str[i];

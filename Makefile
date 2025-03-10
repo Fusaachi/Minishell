@@ -6,7 +6,7 @@
 #    By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 15:16:56 by pgiroux           #+#    #+#              #
-#    Updated: 2025/02/17 13:20:42 by pgiroux          ###   ########.fr        #
+#    Updated: 2025/03/10 13:44:55 by pgiroux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 
-FILE = main quote init exec init_cmd_exec
+FILE = main quote init exec init_cmd_exec utils_cmd
 SIGNAL = signals
 ENV = env
 UTIL = free is skip_whitespace epur

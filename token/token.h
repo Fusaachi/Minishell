@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:23:07 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/07 15:47:36 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/10 13:59:32 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,9 @@ struct s_token
 };
 
 void	cmd_tok(t_data *data);
-void	print(t_data *data, t_cmd *cmd);
 
-t_cmd	*new_cmd(const char *src, size_t size);
 t_token	*new_token(const char *src, size_t size);
+t_cmd	*new_cmd(const char *src, size_t size);
 
 void	init_c(t_c *c);
 t_cmd	*split_cmd(t_data *data, char *str, const char delimiter);

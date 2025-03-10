@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:47:17 by pgiroux           #+#    #+#             */
-/*   Updated: 2025/03/07 16:38:26 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:00:38 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	type_token(t_cmd *cmd, t_data *data)
 			search_type(cmd, cmd->token, cmd->token->content, first);
 			if (cmd->token->type == CMD)
 				cmd->cmd_e = true;
-			printf("TOKEN %s = %u\n", cmd->token->content, cmd->token->type);
 			first = false;
 			cmd->token = cmd->token->next;
 		}

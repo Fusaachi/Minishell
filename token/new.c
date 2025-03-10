@@ -6,7 +6,7 @@
 /*   By: pgiroux <pgiroux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:02:19 by fusaaki           #+#    #+#             */
-/*   Updated: 2025/03/07 15:33:31 by pgiroux          ###   ########.fr       */
+/*   Updated: 2025/03/10 11:31:07 by pgiroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ t_token	*new_token(const char *src, size_t size)
 	t_token	*new;
 
 	new = malloc(sizeof(*new));
+	if (!new)
+		exit(EXIT_FAILURE);
 	new->content = malloc(sizeof(char) * size + 1);
-	ft_strlcpy(new->content, src, size);
-	if (!new->content && !new)
+	if (!new->content)
 	{
 		free(new);
 		exit(EXIT_FAILURE);
 	}
+	ft_strlcpy(new->content, src, size);
 	new->next = NULL;
 	new->type = 0;
 	return (new);
@@ -34,13 +36,15 @@ t_cmd	*new_cmd(const char *src, size_t size)
 	t_cmd	*new;
 
 	new = malloc(sizeof(*new));
+	if (!new)
+		exit(EXIT_FAILURE);
 	new->content = malloc(sizeof(char) * size + 1);
-	ft_strlcpy(new->content, src, size);
-	if (!new->content && !new)
+	if (!new->content)
 	{
 		free(new);
 		exit(EXIT_FAILURE);
 	}
+	ft_strlcpy(new->content, src, size);
 	new->next = NULL;
 	new->t_first = NULL;
 	new->token = NULL;
